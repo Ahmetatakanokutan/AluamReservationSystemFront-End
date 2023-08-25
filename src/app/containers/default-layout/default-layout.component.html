@@ -6,18 +6,26 @@
   visible
 >
   <c-sidebar-brand
-    [brandFull]="{
-      src: 'assets/img/brand/coreui-angular.svg',
-      width: 200,
-      height: 46,
-      alt: 'CoreUI Logo'
-    }"
-    [brandNarrow]="{
-      src: 'assets/img/brand/coreui-signet-white.svg',
-      width: 46,
-      height: 46,
-      alt: 'CoreUI Logo'
-    }"
+  [brandFull]="{
+    src: 'assets/img/brand/KqVxBVFXZe.png',
+    width: 256,
+    height: 64,
+    alt: 'CoreUI Logo',
+    style: {
+      padding: '2px',
+      backgroundColor: 'white' 
+    }
+  }"
+  [brandNarrow]="{
+    src: 'assets/img/brand/coreui-base.svg',
+    width: 46,
+    height: 46,
+    alt: 'CoreUI Logo',
+    style: {
+      padding: '2px', 
+      backgroundColor: 'white'
+    }
+  }"
     routerLink="./"
   />
 
@@ -44,6 +52,5 @@
       <router-outlet/>
     </c-container>
   </div>
-  <!--app footer-->
-  <app-default-footer/>
+
 </div>
