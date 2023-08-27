@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 
-import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+import { DashboardChartsData, IChartProps } from './anasayfa-charts-data';
 
 interface IUser {
   name: string;

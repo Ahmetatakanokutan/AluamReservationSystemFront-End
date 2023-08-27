@@ -6,11 +6,12 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'anasayfa',
     pathMatch: 'full'
   },
   {
@@ -21,9 +22,9 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'dashboard',
+        path: 'anasayfa',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/anasayfa/dashboard.module').then((m) => m.DashboardModule)
       },
       {
         path: 'theme',
