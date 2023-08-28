@@ -21,7 +21,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      title: 'Base',
+      title: 'siparis-ver',
     },
     children: [
       {
