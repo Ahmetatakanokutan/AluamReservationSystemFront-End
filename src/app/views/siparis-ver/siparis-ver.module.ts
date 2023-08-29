@@ -7,23 +7,10 @@ import { SiparisVerComponent } from './siparis-ver.component';
 const route: Routes = [
   {
     path: '',
+    component: SiparisVerComponent,
     data: {
       title: 'siparis-ver',
     },
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'cards',
-      },
-      {
-        path: 'siparis-ver',
-        component: SiparisVerComponent,
-        data: {
-          title: 'siparis-ver',
-        },
-      },
-    ]
   }
 ]
 @NgModule({
