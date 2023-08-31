@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { SiparisVerComponent } from './siparis-ver.component';
-
+import { DxSchedulerModule } from 'devextreme-angular';
 
 
 
@@ -19,7 +19,9 @@ const route: Routes = [
 @NgModule({
   declarations: [SiparisVerComponent],
   imports: [
-    RouterModule.forChild(route)
+    DxSchedulerModule,
+    RouterModule.forChild(route),
+    
     
   ],
   exports: [RouterModule

@@ -1,10 +1,46 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">BUTTON</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
 <dx-scheduler
-  timeZone="America/Los_Angeles"
+  timeZone="UTC+3"
   [dataSource]="appointmentsData"
   [views]="['week', 'month']"
   currentView="week"
   [currentDate]="currentDate"
-  [startDayHour]="9"
+  [startDayHour]="8"
+  [endDayHour]="17"
+  [maxAppointmentsPerCell]="1"
+  [ariaValueMax]="1"
+  
+  [showAllDayPanel]="false"
   [height]="600"
 >
 </dx-scheduler>

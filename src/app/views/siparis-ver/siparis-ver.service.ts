@@ -7,7 +7,6 @@ export class Appointment {
 
   endDate: any;
 
-  allDay?: boolean;
 }
 
 const appointments: Appointment[] = [
@@ -19,7 +18,7 @@ const appointments: Appointment[] = [
     text: 'Book Flights to San Fran for Sales Trip',
     startDate: new Date('2021-03-29T19:00:00.000Z'),
     endDate: new Date('2021-03-29T20:00:00.000Z'),
-    allDay: true,
+
   }, {
     text: 'Install New Router in Dev Room',
     startDate: new Date('2021-03-29T21:30:00.000Z'),
@@ -52,7 +51,7 @@ const appointments: Appointment[] = [
     text: 'Customer Workshop',
     startDate: new Date('2021-04-01T18:00:00.000Z'),
     endDate: new Date('2021-04-01T19:00:00.000Z'),
-    allDay: true,
+
   }, {
     text: 'Prepare 2021 Marketing Plan',
     startDate: new Date('2021-04-01T18:00:00.000Z'),
