@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./siparis-ver.component.scss']
 })
 export class SiparisVerComponent {
+ 
 
 }
