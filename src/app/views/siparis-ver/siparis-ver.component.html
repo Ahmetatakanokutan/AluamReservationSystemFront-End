@@ -1,33 +1,10 @@
-<table class="table">
-    <thead class="table-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-            <th scope="col">photo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td><img src="data:image/jpeg;base64,BINARY_DATA_HERE" alt="Profile Image"></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td><img src="data:image/jpeg;base64,ANOTHER_BINARY_DATA" alt="Profile Image"></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            <td><img src="data:image/png;base64,YET_ANOTHER_BINARY_DATA" alt="Profile Image"></td>
-        </tr>
-    </tbody>
-</table>
+<dx-scheduler
+  timeZone="America/Los_Angeles"
+  [dataSource]="appointmentsData"
+  [views]="['week', 'month']"
+  currentView="week"
+  [currentDate]="currentDate"
+  [startDayHour]="9"
+  [height]="600"
+>
+</dx-scheduler>

@@ -37,6 +37,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/scss/styles.scss",
               "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
@@ -105,6 +107,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-calendar/css/angular-calendar.css",
               "src/scss/styles.scss",
               "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],

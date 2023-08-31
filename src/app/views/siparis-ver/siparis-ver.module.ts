@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { SiparisVerComponent } from './siparis-ver.component';
 
 
+
+
+
 const route: Routes = [
   {
     path: '',

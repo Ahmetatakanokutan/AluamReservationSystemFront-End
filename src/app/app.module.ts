@@ -3,7 +3,7 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { DxSchedulerModule } from 'devextreme-angular';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 
 // Import routing module
@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 
 // Import containers
 import {DefaultHeaderComponent, DefaultLayoutComponent } from './containers';
+
+
 
 import {
   AvatarModule,
@@ -33,11 +35,14 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
-  UtilitiesModule
+  UtilitiesModule,
+
+
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AdminComponent } from './views/admin/admin.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -72,7 +77,8 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    DxSchedulerModule
   ],
   providers: [
     {

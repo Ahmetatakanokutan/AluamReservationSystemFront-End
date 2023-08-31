@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-admin',
 
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
 
 })
 export class AdminComponent {
-
+  
 }
