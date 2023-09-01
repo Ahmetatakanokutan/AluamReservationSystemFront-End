@@ -1,87 +1,101 @@
 import { Injectable } from '@angular/core';
 
-export class Appointment {
+
+export class Data {
   text: any;
 
   startDate: any;
 
   endDate: any;
-
 }
 
-const appointments: Appointment[] = [
+const data: Data[] = [
   {
     text: 'Website Re-Design Plan',
-    startDate: new Date('2021-03-29T16:30:00.000Z'),
-    endDate: new Date('2021-03-29T18:30:00.000Z'),
-  }, {
-    text: 'Book Flights to San Fran for Sales Trip',
-    startDate: new Date('2021-03-29T19:00:00.000Z'),
-    endDate: new Date('2021-03-29T20:00:00.000Z'),
-
-  }, {
+    startDate: new Date(2021, 3, 26, 9, 30),
+    endDate: new Date(2021, 3, 26, 11, 30),
+  },
+  {
     text: 'Install New Router in Dev Room',
-    startDate: new Date('2021-03-29T21:30:00.000Z'),
-    endDate: new Date('2021-03-29T22:30:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 26, 13),
+    endDate: new Date(2021, 3, 26, 14),
+  },
+  {
     text: 'Approve Personal Computer Upgrade Plan',
-    startDate: new Date('2021-03-30T17:00:00.000Z'),
-    endDate: new Date('2021-03-30T18:00:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 27, 10),
+    endDate: new Date(2021, 3, 27, 11),
+  },
+  {
     text: 'Final Budget Review',
-    startDate: new Date('2021-03-30T19:00:00.000Z'),
-    endDate: new Date('2021-03-30T20:35:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 27, 13, 30),
+    endDate: new Date(2021, 3, 27, 15),
+  },
+  {
     text: 'New Brochures',
-    startDate: new Date('2021-03-30T21:30:00.000Z'),
-    endDate: new Date('2021-03-30T22:45:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 26, 15),
+    endDate: new Date(2021, 3, 26, 16, 15),
+  },
+  {
     text: 'Install New Database',
-    startDate: new Date('2021-03-31T16:45:00.000Z'),
-    endDate: new Date('2021-03-31T18:15:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 28, 9, 45),
+    endDate: new Date(2021, 3, 28, 12),
+  },
+  {
     text: 'Approve New Online Marketing Strategy',
-    startDate: new Date('2021-03-31T19:00:00.000Z'),
-    endDate: new Date('2021-03-31T21:00:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 28, 14, 30),
+    endDate: new Date(2021, 3, 28, 16, 30),
+  },
+  {
     text: 'Upgrade Personal Computers',
-    startDate: new Date('2021-03-31T22:15:00.000Z'),
-    endDate: new Date('2021-03-31T23:30:00.000Z'),
-  }, {
-    text: 'Customer Workshop',
-    startDate: new Date('2021-04-01T18:00:00.000Z'),
-    endDate: new Date('2021-04-01T19:00:00.000Z'),
-
-  }, {
+    startDate: new Date(2021, 3, 27, 15, 30),
+    endDate: new Date(2021, 3, 27, 16, 45),
+  },
+  {
     text: 'Prepare 2021 Marketing Plan',
-    startDate: new Date('2021-04-01T18:00:00.000Z'),
-    endDate: new Date('2021-04-01T20:30:00.000Z'),
-  }, {
+    startDate: new Date(2021, 4, 3, 13),
+    endDate: new Date(2021, 4, 3, 15),
+  },
+  {
     text: 'Brochure Design Review',
-    startDate: new Date('2021-04-01T21:00:00.000Z'),
-    endDate: new Date('2021-04-01T22:30:00.000Z'),
-  }, {
+    startDate: new Date(2021, 4, 4, 15, 30),
+    endDate: new Date(2021, 4, 5),
+  },
+  {
     text: 'Create Icons for Website',
-    startDate: new Date('2021-04-02T17:00:00.000Z'),
-    endDate: new Date('2021-04-02T18:30:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 30, 10),
+    endDate: new Date(2021, 3, 30, 12),
+  },
+  {
     text: 'Upgrade Server Hardware',
-    startDate: new Date('2021-04-02T21:30:00.000Z'),
-    endDate: new Date('2021-04-02T23:00:00.000Z'),
-  }, {
+    startDate: new Date(2021, 3, 30, 16, 30),
+    endDate: new Date(2021, 3, 30, 18),
+  },
+  {
     text: 'Submit New Website Design',
-    startDate: new Date('2021-04-02T23:30:00.000Z'),
-    endDate: new Date('2021-04-03T01:00:00.000Z'),
-  }, {
+    startDate: new Date(2021, 4, 5, 10),
+    endDate: new Date(2021, 4, 5, 11, 30),
+  },
+  {
     text: 'Launch New Website',
-    startDate: new Date('2021-04-02T19:20:00.000Z'),
-    endDate: new Date('2021-04-02T21:00:00.000Z'),
+    startDate: new Date(2021, 3, 30, 14, 30),
+    endDate: new Date(2021, 3, 30, 16, 10),
   },
 ];
 
 @Injectable()
-export class Service {
-  getAppointments(): Appointment[] {
-    return appointments;
+export class DataService {
+  getData() {
+    return data;
+  }
+
+  getDinnerTime() {
+    return { from: 12, to: 13 };
+  }
+
+  getHolidays() {
+    return [
+      new Date(2021, 3, 29),
+      new Date(2021, 5, 6),
+    ];
   }
 }
