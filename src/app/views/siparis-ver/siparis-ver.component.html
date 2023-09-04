@@ -5,7 +5,7 @@
   [currentDate]="currentDate"
   [firstDayOfWeek]="0"
   [startDayHour]="9"
-  [endDayHour]="19"
+  [endDayHour]="17"
   [showAllDayPanel]="false"
   [height]="600"
   dataCellTemplate="dataCellTemplate"
@@ -40,6 +40,6 @@
     [ngClass]="{ dinner: isDinner(timeCell.date) }"
   >
     {{ timeCell.text }}
-
+    <div *ngIf="hasCoffeeCupIcon(timeCell.date)" class="cafe"></div>
   </div>
 </dx-scheduler>
