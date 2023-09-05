@@ -43,8 +43,8 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AdminComponent } from './views/admin/admin.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { CalendarComponent } from './views/calendar/calendar.component';
+
+
 
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
@@ -52,7 +52,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, AdminComponent, CalendarComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS, AdminComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

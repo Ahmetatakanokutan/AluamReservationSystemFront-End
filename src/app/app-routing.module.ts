@@ -29,7 +29,7 @@ const routes: Routes = [
       {
         path: 'siparis-ver',
         loadChildren: () =>
-          import('./views/siparis-ver/siparis-ver.module').then((m) => m.SiparisVerModule)
+          import('./views/siparis-ver/siparis-ver.module').then((m) => m.SiparisVerModule),
       },
       {
         path: 'widgets',
@@ -71,7 +71,7 @@ const routes: Routes = [
       title: 'Register Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  {path: '**', redirectTo: 'anasayfa'}
 ];
 
 @NgModule({

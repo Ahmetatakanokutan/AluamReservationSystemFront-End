@@ -4,27 +4,40 @@ import { RouterModule, Routes } from '@angular/router';
 import { SiparisVerComponent } from './siparis-ver.component';
 import { DxButtonModule, DxSchedulerModule, DxValidatorModule } from 'devextreme-angular';
 import { BrowserModule } from '@angular/platform-browser';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 
 
 
-const route: Routes = [
+const routes: Routes = [
   {
     path: '',
-    component: SiparisVerComponent,
-    data: {
-      title: 'siparis-ver',
-    },
-  }
-]
+    children:[
+      {
+        path: '',
+        component:SiparisVerComponent,
+        pathMatch:'full'
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent,
+      }
+    ]
+
+  },
+
+
+    
+  
+];
 @NgModule({
-  declarations: [SiparisVerComponent],
+  declarations: [SiparisVerComponent, CalendarComponent],
   imports: [
     CommonModule,
     DxSchedulerModule,
     DxButtonModule,
     DxValidatorModule,
-    RouterModule.forChild(route),
+    RouterModule.forChild(routes),
     
     
   ],
