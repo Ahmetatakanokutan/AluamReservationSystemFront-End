@@ -37,11 +37,20 @@ const routes: Routes = [
     DxSchedulerModule,
     DxButtonModule,
     DxValidatorModule,
-    RouterModule.forChild(routes),
-    
+    RouterModule.forChild([
+      {
+        path: '',
+        component:SiparisVerComponent,
+        pathMatch:'full'
+      },
+      {
+        path: 'calendar',
+        component: CalendarComponent,
+      },
+    ]),
     
   ],
-  exports: [RouterModule
+  exports: [RouterModule,SiparisVerComponent
   ]
 })
 export class SiparisVerModule { }

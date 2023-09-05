@@ -18,7 +18,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Widgets',
-    url: '/widgets',
+    url: '/siparis-ver/calendar',
     iconComponent: { name: 'cil-calculator' },
 
   },

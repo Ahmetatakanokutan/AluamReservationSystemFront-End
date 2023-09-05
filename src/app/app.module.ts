@@ -43,6 +43,7 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AdminComponent } from './views/admin/admin.component';
+import { SiparisVerModule } from './views/siparis-ver/siparis-ver.module';
 
 
 
@@ -79,7 +80,8 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    SiparisVerModule
     
   ],
   providers: [
