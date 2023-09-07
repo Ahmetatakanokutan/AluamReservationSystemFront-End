@@ -13,5 +13,11 @@ import { Router } from '@angular/router';
   providers: [DataService]
 })
 export class SiparisVerComponent {
+  constructor(private router: Router) {}
+
+  changeRoute() {
+    const newUrl = '/siparis-ver/calendar'; 
+    this.router.navigate([newUrl]);
+  }
 }
 

@@ -7,6 +7,7 @@ import {
   ButtonGroupModule,
   ButtonModule,
   CardModule,
+  CarouselModule,
   FormModule,
   GridModule,
   NavModule,
@@ -25,6 +26,7 @@ import { SiparisVerModule } from '../siparis-ver/siparis-ver.module';
 
 @NgModule({
   imports: [
+    CarouselModule,
     DashboardRoutingModule,
     CardModule,
     NavModule,

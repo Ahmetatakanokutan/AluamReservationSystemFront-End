@@ -1,7 +1,89 @@
-:host {
-  .legend {
-    small {
-      font-size: x-small;
-    }
-  }
+.image-container {
+  display: flex;
+  justify-content: center; /* Yatayda ortala */
+
+  height: 10vh; /* İçerik yüksekliğini ayarlayın, isteğe bağlı */
 }
+
+
+h2 {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  font-size: 40px;
+  color: #3A3C42; 
+  -webkit-transition: all 0.4s ease 0s;
+  -o-transition: all 0.4s ease 0s;
+  transition: all 0.4s ease 0s;
+}
+
+h2 span {
+  display: block;
+  font-size: 0.5em;
+  line-height: 1.3;
+}
+
+h2 em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+
+.seven h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 300;
+  color: #444; /* Grimsi gri rengi */
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-template-rows: 27px 0;
+  grid-gap: 20px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.seven h2:after, .seven h2:before {
+  content: " ";
+  display: block;
+  border-bottom: 2px solid #0098B2; /* Turkuaz rengi ve kalınlığı artırıldı */
+  border-top: 2px solid #0098B2; /* Turkuaz rengi ve kalınlığı artırıldı */
+  height: 10px;
+  background-color: transparent; /* Arkaplan rengi saydam olarak ayarlandı */
+  position: relative;
+
+}
+
+
+.three h2 {
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.5em;
+  padding-bottom: 5px;
+  position: relative;
+  margin-top: 60px;
+}
+.three h2:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 5px;
+  width: 55px;
+  background-color: #0098B2;
+}
+.three h2:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  height: 1px;
+  width: 95%;
+  max-width: 255px;
+  background-color: #0098B2;
+}
+
