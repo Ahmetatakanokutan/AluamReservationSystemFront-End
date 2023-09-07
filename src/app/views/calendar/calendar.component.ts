@@ -19,7 +19,6 @@ export class CalendarComponent {
  
   dataSource: DataSource;
   control: false | undefined;
-  currentDate = new Date(2021, 3, 27);
 
   
   views = ['workWeek', 'month'];
@@ -52,7 +51,7 @@ export class CalendarComponent {
     const isThereMoreThanOneAppointment = this.isThereMoreThanOneAppointment(startDate, endDate);
     if ((!this.isValidAppointmentDate(startDate) || isThereMoreThanOneAppointment) && !this.control) {
       e.cancel = true;
-      this.Notification('hata','aynı hücreye birden fazla rezervasyon ya da öğle arasında rezervasyon yapılamaz','error');
+      this.Notification('hata','geçmiş tarihte, öğle arasında ya da aynı hücreye birden fazla rezervasyon yapılamaz','error');
 
     }
     
@@ -66,7 +65,7 @@ export class CalendarComponent {
     const isThereMoreThanOneAppointment = this.isThereMoreThanOneAppointment(startDate, endDate);
     if ((!isValidAppointment || isThereMoreThanOneAppointment) && !this.isDinnerControl(startDate, endDate)) {
       e.cancel = true;
-      this.Notification('hata','aynı hücreye birden fazla rezervasyon ya da öğle arasında rezervasyon yapılamaz','error');
+      this.Notification('hata','geçmiş tarihte, öğle arasında ya da aynı hücreye birden fazla rezervasyon yapılamaz','error');
     }
     else{
       this.Notification('başarılı','seçiminiz gereksinimlere uyumludur.','success');
@@ -94,11 +93,6 @@ export class CalendarComponent {
     }
   }
 
-  notifyDisableDate() { 
-    notify("Cannot create or move an appointment/event to disabled time/date regions.", 'warning', 1000)
-      alert("Cannot create or move an appointment/event to disabled time/date regions.");
-    
-  }
   isThereMoreThanOneAppointment(startDate: any, endDate: any) {
     const appointments = this.dataService.getData();
   
@@ -122,7 +116,7 @@ export class CalendarComponent {
 
   isWeekend(date: Date) {
     const day = date.getDay();
-    return day === 0 || day === 6;
+    return day === 0 || day === 6 || date.getTime() < Date.now();
   }
 
   isDisableDate(date: Date) {

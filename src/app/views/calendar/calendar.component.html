@@ -3,7 +3,7 @@
     [dataSource]="dataSource"
     [views]="views"
     [currentView]="currentView"
-    [currentDate]="currentDate"
+
     
     [firstDayOfWeek]="0"
     [startDayHour]="9"
@@ -28,14 +28,16 @@
       }"
     >
       {{ isMonthView() ? dataCell.startDate.getDate() : "" }}
+   
     </div>
-  
     <div
-      *dxTemplate="let dateCell of 'dateCellTemplate'"
-      [ngClass]="{ 'disable-date': isDisabledDateCell(dateCell.date) }"
-    >
-      {{ dateCell.text }}
-    </div>
+    *dxTemplate="let dateCell of 'dateCellTemplate'"
+    [ngClass]="{ 'disable-date': isDisabledDateCell(dateCell.date) }"
+  >
+    {{ dateCell.text }}
+  </div>
+
+   
   
     <div
       *dxTemplate="let timeCell of 'timeCellTemplate'"
@@ -46,6 +48,6 @@
     </div>
   </dx-scheduler>
 
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <button class="blue-button">Yöneticiye talebi ilet</button>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end custom-button-container">
+    <button class="btn btn-dark">Yöneticiye randevu talebini ilet</button>
   </div>

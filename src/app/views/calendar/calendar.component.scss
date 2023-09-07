@@ -71,21 +71,8 @@
       background-color: transparent;
     }
   }
-  .blue-button {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 18px;
-    background-color: #007bff; // Mavi arka plan rengi
-    color: #fff; // Beyaz metin rengi
-    border: none; // Kenarlık yok
-    padding: 10px 20px; // Düğme içeriği için dolgular
-    cursor: pointer; // Üzerine geldiğinde imleci el işareti yap
-    border-radius: 4px; // Köşeleri yuvarla
-    transition: background-color 0.3s ease; // Geçiş efekti ekle
-  
-    &:hover {
-      background-color: #0056b3; // Fare üzerine geldiğinde farklı bir mavi
-    }
+  .custom-button-container {
+    margin-top: 20px; 
   }
   .custom-heading {
     font-size: 24px; /* Yazı boyutunu ayarlayın */
