@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, signal,  } from '@angular/core';
+type Slide = { id:number, src:string, title:string, subtitle:string}
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
+  slides: Slide[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
 
   constructor() { }
 
