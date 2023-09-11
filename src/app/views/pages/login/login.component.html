@@ -6,13 +6,14 @@
           <c-card class="p-4">
             <c-card-body>
               <form cForm>
-                <h1>Login</h1>
-                <p class="text-medium-emphasis">Sign In to your account</p>
+                <h1>giriş yap</h1>
+                <p class="text-medium-emphasis">hesabınızda oturum açabilirsiniz</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
-                  <input autoComplete="username" cFormControl placeholder="Username" />
+                  <input autoComplete="email" name="email" [(ngModel)]="email"
+                   cFormControl placeholder="email" />
                 </c-input-group>
                 <c-input-group class="mb-4">
                   <span cInputGroupText>
@@ -21,20 +22,21 @@
                   <input
                     autoComplete="current-password"
                     cFormControl
-                    placeholder="Password"
+                    placeholder="şifre"
+                    name="password" [(ngModel)]="password"
                     type="password"
                   />
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary">
-                      Login
+                    <button cButton class="px-4" (click)="login()" color="primary">
+                      Giriş Yap
+                    </button>
+                    <button cButton class="px-4" (click)="asd()" color="primary">
+                      Giriş Yap
                     </button>
                   </c-col>
                   <c-col class="text-right" xs="6">
-                    <button cButton class="px-0" color="link">
-                      Forgot password?
-                    </button>
                   </c-col>
                 </c-row>
               </form>
@@ -43,13 +45,13 @@
           <c-card [ngStyle]="{'width.%': 44}" class="text-white bg-primary py-5">
             <c-card-body class="text-center">
               <div>
-                <h2>Sign up</h2>
+                <h2>kayıt ol</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua.
+                  kayıt olmak için başvuru metnini aşağıdaki linkten doldurup yöneticiye iletmeniz gerekmektedir.
+                  yönetici kaydını onayladığı zaman sisteme giriş yapabilirsiniz
                 </p>
                 <button [active]="true" cButton class="mt-3" color="primary" routerLink="/register">
-                  Register Now!
+                  kayıt ol!
                 </button>
               </div>
             </c-card-body>

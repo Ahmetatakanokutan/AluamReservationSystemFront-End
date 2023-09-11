@@ -44,6 +44,7 @@ import {
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AdminComponent } from './views/admin/admin.component';
 import { SiparisVerModule } from './views/siparis-ver/siparis-ver.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -55,6 +56,7 @@ const APP_CONTAINERS = [
 @NgModule({
   declarations: [AppComponent, ...APP_CONTAINERS, AdminComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

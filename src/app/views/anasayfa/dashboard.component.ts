@@ -1,4 +1,6 @@
 import { Component, OnInit, signal,  } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+
 type Slide = { id:number, src:string, title:string, subtitle:string}
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -7,7 +9,8 @@ type Slide = { id:number, src:string, title:string, subtitle:string}
 export class DashboardComponent implements OnInit {
   slides: Slide[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
+  
 
   ngOnInit(): void {
     this.slides[0] = {

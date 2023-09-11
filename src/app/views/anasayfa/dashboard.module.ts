@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 import {
   AvatarModule,
   ButtonGroupModule,
@@ -26,7 +27,6 @@ import { SiparisVerModule } from '../siparis-ver/siparis-ver.module';
 
 @NgModule({
   imports: [
-    
     CarouselModule,
     DashboardRoutingModule,
     CardModule,
