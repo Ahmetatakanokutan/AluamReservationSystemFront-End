@@ -1,0 +1,15 @@
+.bg-primary {
+    background-color: #0098b2 !important;
+  }
+  .btn.btn-light {
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+    color: #000 !important;
+  }
+  
+  /* Butonun mouse üzerine gelince gri renk */
+  .btn.btn-light:hover {
+    background-color: #ccc !important;
+    border-color: #ccc !important;
+    color: #000 !important;
+  }

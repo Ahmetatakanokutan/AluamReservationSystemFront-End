@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {LoginService} from './login.service'
+import { Router } from '@angular/router';
+import { DefaultHeaderService } from 'src/app/containers/default-layout/default-header/default-header.service';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,18 +10,30 @@ import {LoginService} from './login.service'
 })
 
 export class LoginComponent {
-  constructor(private loginService:LoginService) { }
+  constructor(private loginService:LoginService, private router: Router,
+    private defaultHeaderService: DefaultHeaderService) { }
   email: string = '';
   password:string = '';
-   
+
+  Notification(status:string, message:string,type:SweetAlertIcon) {
+    Swal.fire(status, message, type);
+  }
+
   login(){
     this.loginService.login(this.email,this.password).subscribe(
       (response) => {
 
         console.log(response);
-        localStorage.setItem('auth-token', response);
+        localStorage.setItem('auth-token', JSON.stringify(response));
+
+        this.router.navigate(['/anasayfa'])
+          .then(() => {
+          window.location.reload();
+        });
       },
       (error) => {
+        this.Notification('hata','E postanız ya da şifreniz hatalı','error');
+
         console.error(error);
       }
     );
@@ -27,7 +42,7 @@ export class LoginComponent {
   }
   stringifiedData: any;
   asd(){
-    this.stringifiedData = JSON.parse(localStorage.getItem('auth-token')|| '{}');
+    this.stringifiedData = localStorage.getItem('auth-token');
       console.log(this.stringifiedData)
   }
  

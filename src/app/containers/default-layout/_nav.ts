@@ -8,13 +8,24 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Ürünler',
-    title: true
+    title: true,
+    attributes: {
+      filter: (item: INavData) => {
+        // Sadece öğenin adı "Login" olan alt öğeyi göstermek için bir koşul belirtiyoruz
+        return item.name === 'Login';
+      }
+    }
   },
   {
     name: 'Siparis ver',
     url: '/siparis-ver',
     iconComponent: { name: 'cil-puzzle' },
- 
+    attributes: {
+      filter: (item: INavData) => {
+        // Sadece öğenin adı "Login" olan alt öğeyi göstermek için bir koşul belirtiyoruz
+        return item.name === 'Login';
+      }
+    }
   },
   {
     name: 'Widgets',
@@ -46,7 +57,9 @@ export const navItems: INavData[] = [
       {
         name: 'Error 500',
         url: '/500'
+        
       }
     ]
+
   },
 ];
