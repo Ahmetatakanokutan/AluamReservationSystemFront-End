@@ -32,6 +32,11 @@ const routes: Routes = [
           import('./views/siparis-ver/siparis-ver.module').then((m) => m.SiparisVerModule),
       },
       {
+        path: 'admin',
+        loadChildren: () =>
+          import('./views/admin/admin-routing.module').then((m) => m.AdminRoutingModule),
+      },
+      {
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule)

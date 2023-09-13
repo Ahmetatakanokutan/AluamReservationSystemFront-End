@@ -24,6 +24,7 @@ import { DashboardComponent } from './dashboard.component';
 
 import { WidgetsModule } from '../widgets/widgets.module';
 import { SiparisVerModule } from '../siparis-ver/siparis-ver.module';
+import { AdminRoutingModule } from '../admin/admin-routing.module';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { SiparisVerModule } from '../siparis-ver/siparis-ver.module';
     AvatarModule,
     TableModule,
     WidgetsModule,
-    SiparisVerModule
+    SiparisVerModule,
+    AdminRoutingModule
   ],
   declarations: [DashboardComponent]
 })

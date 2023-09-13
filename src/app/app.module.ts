@@ -42,9 +42,11 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
-import { AdminComponent } from './views/admin/admin.component';
 import { SiparisVerModule } from './views/siparis-ver/siparis-ver.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminRoutingModule } from './views/admin/admin-routing.module';
+
+
 
 
 
@@ -54,7 +56,7 @@ const APP_CONTAINERS = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...APP_CONTAINERS, AdminComponent],
+  declarations: [AppComponent, ...APP_CONTAINERS],
   imports: [
     
     HttpClientModule,
@@ -84,7 +86,8 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     NgScrollbarModule,
-    SiparisVerModule
+    SiparisVerModule,
+    AdminRoutingModule
     
   ],
   providers: [

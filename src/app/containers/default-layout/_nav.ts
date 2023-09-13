@@ -1,5 +1,8 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { INavData } from '@coreui/angular';
-
+import { Role } from '../../enums/roleEnum';
+import { DefaultHeaderService } from './default-header/default-header.service';
+const defaultHeaderService = new DefaultHeaderService();
 export const navItems: INavData[] = [
   {
     name: 'Anasayfa',
@@ -10,28 +13,54 @@ export const navItems: INavData[] = [
     name: 'Ürünler',
     title: true,
     attributes: {
-      filter: (item: INavData) => {
-        // Sadece öğenin adı "Login" olan alt öğeyi göstermek için bir koşul belirtiyoruz
-        return item.name === 'Login';
-      }
+      hidden:defaultHeaderService.hiddenForUser()
+      
     }
   },
   {
-    name: 'Siparis ver',
+    name: 'rezervasyon yap',
     url: '/siparis-ver',
-    iconComponent: { name: 'cil-puzzle' },
+    iconComponent: { name: 'cil-calendar' },
     attributes: {
-      filter: (item: INavData) => {
-        // Sadece öğenin adı "Login" olan alt öğeyi göstermek için bir koşul belirtiyoruz
-        return item.name === 'Login';
-      }
+      hidden:defaultHeaderService.hiddenForUser(),
+      disabled:defaultHeaderService.disabledForUser()
+    }
+
+  },
+  {
+    name: 'Yönetici Ayarları',
+    title: true,
+    attributes: {
+      hidden:defaultHeaderService.hiddenForAdmin(),
+
     }
   },
   {
-    name: 'Widgets',
-    url: '/siparis-ver/calendar',
-    iconComponent: { name: 'cil-calculator' },
+    name: 'Kayıt isteklerini incele',
+    url: '/admin/register-requests',
+    iconComponent: { name: 'cil-search' },
+    attributes: {
+      hidden:defaultHeaderService.hiddenForAdmin(),
 
+    }
+  },
+  {
+    name: 'Rezervasyon istekleri',
+    url: '/admin/reservation-requests',
+    iconComponent: { name: 'cil-book' },
+    attributes: {
+      hidden:defaultHeaderService.hiddenForAdmin(),
+
+    }
+  },
+  {
+    name: 'Yeni cihaz ekle',
+    url: '/admin/add-new-device',
+    iconComponent: { name: 'cil-plus' },
+    attributes: {
+      hidden:defaultHeaderService.hiddenForAdmin(),
+
+    }
   },
   {
     title: true,
@@ -63,3 +92,4 @@ export const navItems: INavData[] = [
 
   },
 ];
+
