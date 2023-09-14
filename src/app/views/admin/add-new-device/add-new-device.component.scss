@@ -1,0 +1,16 @@
+.btn.btn-primary {
+    background-color: #0098B2; /* Arka plan rengi */
+    border-color: #0098B2; /* Kenarlık rengi (isteğe bağlı) */
+    color: white; /* Yazı rengi */
+    transition: background-color 0.3s ease; /* Geçiş efekti ayarı */
+  }
+  
+  .btn.btn-primary:hover {
+    background-color: #008099; /* Mouse üzerine gelince rengi karart */
+  }
+
+  .modal-dialog.modal-dialog-centered.modal-dialog-scrollable.modal-lg {
+    margin: -20 auto; /* Modalı yatayda ortalar */
+    transform: translateX(-10%); /* Modalı yatayda 10% sola kaydırır */
+    
+  }

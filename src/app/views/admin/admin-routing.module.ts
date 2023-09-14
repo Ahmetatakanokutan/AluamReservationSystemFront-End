@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {AddNewDeviceComponent } from './add-new-device/add-new-device.component'
 import { RegisterRequestsComponent } from './register-requests/register-requests.component';
 import { ReservationRequestsComponent } from './reservation-requests/reservation-requests.component';
+import { ModalModule } from '@coreui/angular';
+import { HttpClientModule } from '@angular/common/http';
 const routes: Routes = [
   {
     path: '',
@@ -40,6 +42,8 @@ const routes: Routes = [
   
   imports: [
     CommonModule,
+    ModalModule,
+    HttpClientModule,
     RouterModule.forChild(routes),
   ]
 })

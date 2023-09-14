@@ -24,6 +24,7 @@ import {
   BreadcrumbModule,
   ButtonGroupModule,
   ButtonModule,
+  ModalModule,
   CardModule,
   DropdownModule,
   FooterModule,
@@ -60,6 +61,7 @@ const APP_CONTAINERS = [
   imports: [
     
     HttpClientModule,
+    ModalModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

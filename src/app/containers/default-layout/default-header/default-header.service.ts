@@ -10,9 +10,24 @@ import { Router } from '@angular/router';
 export class DefaultHeaderService {
   isLoggedIn = new BehaviorSubject(false);
   helper = new JwtHelperService();
-
   constructor() {
     this.isLogged();
+  }
+  route(){ 
+    
+      const authToken = localStorage.getItem('auth-token');
+      if(authToken != null){
+  
+        if(this.getStorageData(authToken).roles === 'USER'){
+          return '/siparis-ver'
+        }
+        else{
+        return 'login'
+      }
+      }
+      return 'login'
+  
+    
   }
 
   isLogged() {
@@ -21,6 +36,7 @@ export class DefaultHeaderService {
       this.isLoggedIn.next(true)
       console.log(this.helper.decodeToken(authToken).roles)
       if(this.helper.isTokenExpired(authToken)){
+        localStorage.removeItem('auth-token')
         this.isLoggedIn.next(false)
       }
     }
@@ -30,22 +46,6 @@ export class DefaultHeaderService {
     }
 
   }
-   hiddenForUser(){
-    const authToken = localStorage.getItem('auth-token');
-    if(authToken != null){
-
-      if(this.getStorageData(authToken).roles === 'USER'){
-        return null
-      }
-      else{
-      return true
-    }
-    }
-    return null
-  }
-
-
-
 
 
   disabledForUser(){
@@ -61,6 +61,20 @@ export class DefaultHeaderService {
     
     
   
+   hiddenForUser(){
+    const authToken = localStorage.getItem('auth-token');
+    if(authToken != null){
+
+      if(this.getStorageData(authToken).roles === 'USER'){
+        return null
+      }
+      else{
+      return true
+    }
+    }
+    return null
+  }
+
   hiddenForAdmin(){
     const authToken = localStorage.getItem('auth-token');
     if(authToken != null){

@@ -1,1 +1,104 @@
-<p>add-new-device works!</p>
+
+<table class="table table-striped ">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">İsim</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Kullanıcı tipi</th>
+        <th scope="col">Rezervasyon zamanını incele</th> 
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <th scope="row">2</th>
+        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
+        
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        </td> 
+      <tr>
+        <th scope="row">3</th>
+        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
+        
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
+        
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
+        
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
+        
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+
+
+
+<c-modal #staticBackdropModal backdrop="static" id="staticBackdropModal"  class="modal-dialog-centered modal-lg">
+  <c-modal-header>
+    <h5 cModalTitle>Makine Ekle</h5>
+    <button [cModalToggle]="staticBackdropModal.id" class="btn btn-light" cButtonClose>
+        <span class="close-icon">X</span>
+    </button>
+  </c-modal-header>
+  <c-modal-body>
+
+    <label for="MachineName" class="form-label">Makinenin ismi</label>
+    <input id="MachineName" type="text" formControlName="MachineName" class="form-control"[value]="" aria-describedby="passwordHelpBlock">
+    <div class="mb-4">
+      </div>
+    <label for="MachinePrice" class="form-label">Makinenin fiyatı</label>
+    <input type="MachinePrice" class="form-control" formControlName="MachinePrice" aria-describedby="passwordHelpBlock">
+    <div class="mb-4">
+      </div>
+    <label for="MachineFeatures" class="form-label">Makinenin özellikleri</label>
+    <input type="MachineFeatures" class="form-control" formControlName="MachineFeatures" aria-describedby="passwordHelpBlock">
+    <div id="HelpBlock" class="form-text mb-4">
+      Makina için eklemek istediğiniz makina büyüklükleri makina ucu çapı gibi özellikler varsa buraya ekleyebilirsiniz</div>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Resim dosyası seçin (jpg, jpeg veya png)</label>
+        <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile" accept=".jpg, .jpeg, .png">
+      </div>
+      <div class="mb-4">
+        </div>
+
+
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="staticBackdropModal.id" cButton class="btn btn-dark">
+      İptal et
+    </button>
+    <button cButton color="primary" class="btn btn-primary">Ekle</button>
+  </c-modal-footer>
+</c-modal>

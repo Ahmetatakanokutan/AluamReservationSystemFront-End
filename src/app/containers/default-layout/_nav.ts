@@ -14,16 +14,14 @@ export const navItems: INavData[] = [
     title: true,
     attributes: {
       hidden:defaultHeaderService.hiddenForUser()
-      
     }
   },
   {
     name: 'rezervasyon yap',
-    url: '/siparis-ver',
+    url: defaultHeaderService.route(),
     iconComponent: { name: 'cil-calendar' },
     attributes: {
       hidden:defaultHeaderService.hiddenForUser(),
-      disabled:defaultHeaderService.disabledForUser()
     }
 
   },

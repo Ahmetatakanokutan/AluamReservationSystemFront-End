@@ -40,6 +40,7 @@
               "node_modules/devextreme/dist/css/dx.light.css",
               "node_modules/angular-calendar/css/angular-calendar.css",
               "node_modules/sweetalert2/src/sweetalert2.scss",
+              "node_modules/@coreui/coreui/scss/coreui.scss",
               "src/scss/styles.scss"
 
             ],

@@ -68,6 +68,7 @@ import {
   cilOptions,
   cilPaperclip,
   cilPaperPlane,
+  cilCart,
   cilPen,
   cilPencil,
   cilPeople,
