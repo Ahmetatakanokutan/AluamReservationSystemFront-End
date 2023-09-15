@@ -1,5 +1,8 @@
+<div class="d-grid gap-2">
+<button cButton color="primary" size="lg" [cModalToggle]="insertModal.id" cButton>Yeni makine ekle</button>
+</div>
 
-<table class="table table-striped ">
+<table  cTable [responsive]="true" >
     <thead class="table-dark">
       <tr>
         <th scope="col">#</th>
@@ -7,7 +10,8 @@
         <th scope="col">Email</th>
         <th scope="col">Telefon</th>
         <th scope="col">Kullanıcı tipi</th>
-        <th scope="col">Rezervasyon zamanını incele</th> 
+        <th scope="col">güncelle</th> 
+        <th scope="col">sil</th>
       </tr>
     </thead>
     <tbody>
@@ -19,7 +23,9 @@
         <td>Jacob</td>
         <td>Thornton</td>
         <td>@fat</td>
-        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        <td><button [cModalToggle]="updateModal.id" cButton color="success" >güncelle</button>
+        </td>
+        <td><button cButton color="danger" >sil</button>
         </td> 
       <tr>
         <th scope="row">3</th>
@@ -27,8 +33,10 @@
         
         <td colspan="2">Larry the Bird</td>
         <td>@twitter</td>
-        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
         </td>
+        <td><button cButton color="danger" >sil</button>
+        </td> 
       </tr>
       <tr>
         <th scope="row">3</th>
@@ -36,8 +44,10 @@
         
         <td colspan="2">Larry the Bird</td>
         <td>@twitter</td>
-        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
         </td>
+        <td><button cButton color="danger" >sil</button>
+        </td> 
       </tr>
       <tr>
         <th scope="row">3</th>
@@ -45,8 +55,10 @@
         
         <td colspan="2">Larry the Bird</td>
         <td>@twitter</td>
-        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
         </td>
+        <td><button cButton color="danger" >sil</button>
+        </td> 
       </tr>
       <tr>
         <th scope="row">3</th>
@@ -54,8 +66,10 @@
         
         <td colspan="2">Larry the Bird</td>
         <td>@twitter</td>
-        <td><button class="btn btn-dark" [cModalToggle]="staticBackdropModal.id" cButton>Launch static backdrop modal</button>
+        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
         </td>
+        <td><button cButton color="danger" >sil</button>
+        </td> 
       </tr>
 
     </tbody>
@@ -65,25 +79,25 @@
 
 
 
-<c-modal #staticBackdropModal backdrop="static" id="staticBackdropModal"  class="modal-dialog-centered modal-lg">
+<c-modal #insertModal backdrop="static" alignment="center" id="insertModal"  class="modal-dialog-centered modal-lg" >
   <c-modal-header>
     <h5 cModalTitle>Makine Ekle</h5>
-    <button [cModalToggle]="staticBackdropModal.id" class="btn btn-light" cButtonClose>
-        <span class="close-icon">X</span>
+    <button [cModalToggle]="insertModal.id" class="btn btn-light" cButtonClose>
+
     </button>
   </c-modal-header>
   <c-modal-body>
 
     <label for="MachineName" class="form-label">Makinenin ismi</label>
-    <input id="MachineName" type="text" formControlName="MachineName" class="form-control"[value]="" aria-describedby="passwordHelpBlock">
+    <input #MachineName id="MachineName" type="text" formControlName="MachineName" class="form-control" aria-describedby="passwordHelpBlock">
     <div class="mb-4">
       </div>
     <label for="MachinePrice" class="form-label">Makinenin fiyatı</label>
-    <input type="MachinePrice" class="form-control" formControlName="MachinePrice" aria-describedby="passwordHelpBlock">
+    <input #MachinePrice type="MachinePrice" class="form-control" formControlName="MachinePrice" aria-describedby="passwordHelpBlock">
     <div class="mb-4">
       </div>
     <label for="MachineFeatures" class="form-label">Makinenin özellikleri</label>
-    <input type="MachineFeatures" class="form-control" formControlName="MachineFeatures" aria-describedby="passwordHelpBlock">
+    <textarea #MachineFeatures class="form-control" formControlName="MachineFeatures" aria-describedby="passwordHelpBlock" rows="5"></textarea>
     <div id="HelpBlock" class="form-text mb-4">
       Makina için eklemek istediğiniz makina büyüklükleri makina ucu çapı gibi özellikler varsa buraya ekleyebilirsiniz</div>
     <div class="mb-3">
@@ -96,9 +110,51 @@
 
   </c-modal-body>
   <c-modal-footer>
-    <button [cModalToggle]="staticBackdropModal.id" cButton class="btn btn-dark">
+    <button [cModalToggle]="insertModal.id" class="btn btn-dark">
       İptal et
     </button>
-    <button cButton color="primary" class="btn btn-primary">Ekle</button>
+    <button (click)="onSubmit()" cButton color="primary" class="btn btn-primary">Ekle</button>
+  </c-modal-footer>
+</c-modal>
+
+
+
+
+
+
+<button [cModalToggle]="updateModal.id" cButton color="success">Makine özelliklerini güncelle</button>
+<c-modal #updateModal alignment="center"backdrop="static" alignment="center" id="updateModal" class="modal-dialog-centered modal-lg">
+  <c-modal-header>
+    <h5 cModalTitle>Makine özelliklerini güncelle</h5>
+    <button [cModalToggle]="updateModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    
+    <label for="MachineName" class="form-label">Makinenin ismi</label>
+    <input #MachineName id="MachineName" type="text" formControlName="MachineName" class="form-control"[value]="" aria-describedby="passwordHelpBlock">
+    <div class="mb-4">
+      </div>
+    <label for="MachinePrice" class="form-label">Makinenin fiyatı</label>
+    <input #MachinePrice type="MachinePrice" class="form-control" formControlName="MachinePrice" aria-describedby="passwordHelpBlock">
+    <div class="mb-4">
+      </div>
+    <label for="MachineFeatures" class="form-label">Makinenin özellikleri</label>
+    <textarea #MachineFeatures class="form-control" formControlName="MachineFeatures" aria-describedby="passwordHelpBlock" rows="5"></textarea>
+    <div id="HelpBlock" class="form-text mb-4">
+      Makina için eklemek istediğiniz makina büyüklükleri makina ucu çapı gibi özellikler varsa buraya ekleyebilirsiniz</div>
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Resim dosyası seçin (jpg, jpeg veya png)</label>
+        <input class="form-control" type="file" (change)="onFileSelected($event)" id="formFile" accept=".jpg, .jpeg, .png">
+      </div>
+      <div class="mb-4">
+        </div>
+
+    
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="updateModal.id" cButton color="secondary">
+      Kapat
+    </button>
+    <button cButton [cModalToggle]="updateModal.id" color="primary">Güncelle</button>
   </c-modal-footer>
 </c-modal>

@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {AddNewDeviceComponent } from './add-new-device/add-new-device.component'
 import { RegisterRequestsComponent } from './register-requests/register-requests.component';
 import { ReservationRequestsComponent } from './reservation-requests/reservation-requests.component';
-import { ModalModule } from '@coreui/angular';
+import { ButtonModule, FormModule, ModalModule, TableModule, UtilitiesModule } from '@coreui/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 const routes: Routes = [
   {
     path: '',
@@ -44,7 +46,11 @@ const routes: Routes = [
     CommonModule,
     ModalModule,
     HttpClientModule,
+    ButtonModule,
+    TableModule,
     RouterModule.forChild(routes),
+
+
   ]
 })
 export class AdminRoutingModule { }

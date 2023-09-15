@@ -89,7 +89,9 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     SiparisVerModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    
     
   ],
   providers: [
