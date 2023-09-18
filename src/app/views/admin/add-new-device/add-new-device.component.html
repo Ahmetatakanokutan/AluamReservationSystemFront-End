@@ -16,61 +16,20 @@
     </thead>
     <tbody>
 
-      <tr>
-        <th scope="row">2</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
+      <tr *ngFor="let machine of machines">
+
+        <th scope="row">{{machine.id}}</th>
+        <td><img src="file:///C:/Users/Atakan/Desktop/TAU_ALOEMReservationSystem/aloemReservationSystem/src/main/resources/MachineImages/20resim.jpg" alt="Resim"></td>
         
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
+        <td>{{machine.name}}</td>
+        <td>{{machine.features}}</td>
+        <td>{{machine.price}}</td>
         <td><button [cModalToggle]="updateModal.id" cButton color="success" >güncelle</button>
         </td>
         <td><button cButton color="danger" >sil</button>
         </td> 
-      <tr>
-        <th scope="row">3</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
-        </td>
-        <td><button cButton color="danger" >sil</button>
-        </td> 
       </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
-        </td>
-        <td><button cButton color="danger" >sil</button>
-        </td> 
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
-        </td>
-        <td><button cButton color="danger" >sil</button>
-        </td> 
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><button [cModalToggle]="updateModal.id" cButton color="success">güncelle</button>
-        </td>
-        <td><button cButton color="danger" >sil</button>
-        </td> 
-      </tr>
+     
 
     </tbody>
   </table>
@@ -113,7 +72,7 @@
     <button [cModalToggle]="insertModal.id" class="btn btn-dark">
       İptal et
     </button>
-    <button (click)="onSubmit()" cButton color="primary" class="btn btn-primary">Ekle</button>
+    <button (click)="onSubmit()" cButton color="primary" [cModalToggle]="insertModal.id" class="btn btn-primary">Ekle</button>
   </c-modal-footer>
 </c-modal>
 
