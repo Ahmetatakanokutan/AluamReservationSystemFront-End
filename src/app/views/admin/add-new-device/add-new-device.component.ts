@@ -15,7 +15,9 @@ export class AddNewDeviceComponent {
   @ViewChild('MachineName') MachineName: ElementRef;
   @ViewChild('MachinePrice') MachinePrice: ElementRef;
   @ViewChild('MachineFeatures') MachineFeatures: ElementRef;
-
+  @ViewChild('UMachineName') UMachineName: ElementRef;
+  @ViewChild('UMachinePrice') UMachinePrice: ElementRef;
+  @ViewChild('UMachineFeatures') UMachineFeatures: ElementRef;
   file: File = null
   machineName: string;
   machinePrice: number;
@@ -24,6 +26,8 @@ export class AddNewDeviceComponent {
   modalOpen = null;
   machines: Machine[] = [];
   machine:Machine = {id:0 ,  name:"" , features:"" , imageUrl:"" , price:""};
+  selectedMachine: Machine = { id: 0, name: '', features: '', imageUrl: '', price: '' };
+
   adminService:AdminService
 
   constructor(adminService:AdminService,  private activatedRoute:ActivatedRoute){
@@ -45,6 +49,7 @@ export class AddNewDeviceComponent {
       (response: Machine[]) => {
         // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
         this.machines = response;
+        console.log(this.machines[1].imageUrl)
       },
       (error) => {
         // HTTP isteğinde hata oluştu, hata işleme kodunu burada ekleyebilirsiniz
@@ -71,4 +76,18 @@ export class AddNewDeviceComponent {
     
     this.adminService.addNewDevice(fd, this.machine)
   }
+
+onUpdate(machine: Machine) {
+  
+  this.selectedMachine = machine;
+}
+update() {
+  const updatedMachineName = this.UMachineName.nativeElement.value;
+  const updatedMachinePrice = this.UMachinePrice.nativeElement.value;
+  const updatedMachineFeatures = this.UMachineFeatures.nativeElement.value;
+
+  // Güncelleme işlemini gerçekleştirin ve verileri kullanın
+  console.log(updatedMachineName, updatedMachinePrice, updatedMachineFeatures);
+}
+
 }

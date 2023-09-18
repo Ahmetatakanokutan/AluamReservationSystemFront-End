@@ -9,6 +9,7 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
 })
 export class AdminService {
 
+
   private baseUrl = 'http://localhost:8080/api/admin';
 
   constructor(private http: HttpClient) {}
@@ -79,6 +80,35 @@ async addNewDevice(fd: FormData, machine: Machine) {
     Swal.fire('Hata', 'Resim yükleme hatası: ' + errorMessage, 'error');
   }
   
+  updateMachine(selectedMachine: Machine) {
+    if (selectedMachine.name != null || selectedMachine.features != null || selectedMachine.price != null) {
+     
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+      });
+
+  
+        const options = { headers };
+  
+        this.http.post(`${this.baseUrl}/update-machine`, selectedMachine, options).subscribe(
+          (res) => {
+            console.log(res);
+            // İşlem başarılı olduğunda SweetAlert'ı burada çağırın
+            this.showSuccessAlert();
+          },
+          (error) => {
+            console.error('Resim yükleme hatası:', error);
+            // Hata işleme kodunu burada ekleyin ve kullanıcıya hata mesajını gösterin
+            this.showErrorAlert(error.message);
+          }
+        );
+      
+    } else {
+      this.Notification('hata', 'Girdiğiniz bilgiler eksik ya da hatalı', 'error');
+    }
+      
+  }
+
   
   tokenParser(token: string): string {
     const regex = /{"token":"(.*?)"}/;

@@ -18,15 +18,21 @@
 
       <tr *ngFor="let machine of machines">
 
-        <th scope="row">{{machine.id}}</th>
-        <td><img src="file:///C:/Users/Atakan/Desktop/TAU_ALOEMReservationSystem/aloemReservationSystem/src/main/resources/MachineImages/20resim.jpg" alt="Resim"></td>
-        
-        <td>{{machine.name}}</td>
-        <td>{{machine.features}}</td>
-        <td>{{machine.price}}</td>
-        <td><button [cModalToggle]="updateModal.id" cButton color="success" >güncelle</button>
+        <th class="align-middle" scope="row">{{machine.id}}</th>
+        <td><img
+          [src]="machine.imageUrl"
+          alt="Resim"
+          [style.max-width.px]="100" 
+          [style.max-height.px]="100" 
+        > </td>
+        <td class="align-middle">{{machine.name}}</td>
+        <td class="align-middle">{{machine.features}}</td>
+        <td class="align-middle">{{machine.price}}</td>
+        <td class="align-middle">
+          <button [cModalToggle]="updateModal.id" cButton color="success" (click)="onUpdate(machine)">güncelle</button>
         </td>
-        <td><button cButton color="danger" >sil</button>
+        <td class="align-middle">
+          <button cButton color="danger">sil</button>
         </td> 
       </tr>
      
@@ -89,16 +95,41 @@
   </c-modal-header>
   <c-modal-body>
     
-    <label for="MachineName" class="form-label">Makinenin ismi</label>
-    <input #MachineName id="MachineName" type="text" formControlName="MachineName" class="form-control"[value]="" aria-describedby="passwordHelpBlock">
+    <label for="UMachineName"  class="form-label">Makinenin ismi</label>
+   
+    <input
+    #UMachineName
+    id="UMachineName"
+    type="text"
+    formControlName="UMachineName"
+    class="form-control"
+    [value]="selectedMachine.name"
+    aria-describedby="passwordHelpBlock"
+  />
+
     <div class="mb-4">
       </div>
-    <label for="MachinePrice" class="form-label">Makinenin fiyatı</label>
-    <input #MachinePrice type="MachinePrice" class="form-control" formControlName="MachinePrice" aria-describedby="passwordHelpBlock">
+    <label for="UMachinePrice" class="form-label">Makinenin fiyatı</label>
+    <input
+    #UMachinePrice
+    id="UMachinePrice"
+    type="text"
+    formControlName="UMachinePrice"
+    class="form-control"
+    [value]="selectedMachine.price"
+    aria-describedby="passwordHelpBlock"
+  />
     <div class="mb-4">
       </div>
-    <label for="MachineFeatures" class="form-label">Makinenin özellikleri</label>
-    <textarea #MachineFeatures class="form-control" formControlName="MachineFeatures" aria-describedby="passwordHelpBlock" rows="5"></textarea>
+    <label for="UMachineFeatures" class="form-label">Makinenin özellikleri</label>
+    <textarea  #UMachineFeatures
+    id="UMachineFeatures"
+    type="text"
+    formControlName="UMachineFeatures"
+    class="form-control"
+    [value]="selectedMachine.features"
+    aria-describedby="passwordHelpBlock"
+    ></textarea>
     <div id="HelpBlock" class="form-text mb-4">
       Makina için eklemek istediğiniz makina büyüklükleri makina ucu çapı gibi özellikler varsa buraya ekleyebilirsiniz</div>
     <div class="mb-3">
@@ -114,6 +145,6 @@
     <button [cModalToggle]="updateModal.id" cButton color="secondary">
       Kapat
     </button>
-    <button cButton [cModalToggle]="updateModal.id" color="primary">Güncelle</button>
+    <button cButton (click)="update()" [cModalToggle]="updateModal.id" color="primary">Güncelle</button>
   </c-modal-footer>
 </c-modal>
