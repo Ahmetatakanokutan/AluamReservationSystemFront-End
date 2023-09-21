@@ -30,6 +30,7 @@ export class LoginComponent {
         this.router.navigate(['/anasayfa'])
           .then(() => {
           window.location.reload();
+          
         });
       },
       (error) => {

@@ -6,10 +6,10 @@
     <thead class="table-dark">
       <tr>
         <th scope="col">#</th>
+        <th scope="col">Resim</th>
         <th scope="col">İsim</th>
-        <th scope="col">Email</th>
-        <th scope="col">Telefon</th>
-        <th scope="col">Kullanıcı tipi</th>
+        <th scope="col">fiyat</th>
+        <th scope="col">özellikler</th>
         <th scope="col">güncelle</th> 
         <th scope="col">sil</th>
       </tr>
@@ -26,13 +26,15 @@
           [style.max-height.px]="100" 
         > </td>
         <td class="align-middle">{{machine.name}}</td>
-        <td class="align-middle">{{machine.features}}</td>
         <td class="align-middle">{{machine.price}}</td>
+        <td class="align-middle">
+          <button [cModalToggle]="featuresModal.id" cButton color="dark" (click)="onUpdate(machine)">Özellikler</button>
+        </td>
         <td class="align-middle">
           <button [cModalToggle]="updateModal.id" cButton color="success" (click)="onUpdate(machine)">güncelle</button>
         </td>
         <td class="align-middle">
-          <button cButton color="danger">sil</button>
+          <button cButton color="danger" (click)="deleteMachine(machine)">sil</button>
         </td> 
       </tr>
      
@@ -86,8 +88,6 @@
 
 
 
-
-<button [cModalToggle]="updateModal.id" cButton color="success">Makine özelliklerini güncelle</button>
 <c-modal #updateModal alignment="center"backdrop="static" alignment="center" id="updateModal" class="modal-dialog-centered modal-lg">
   <c-modal-header>
     <h5 cModalTitle>Makine özelliklerini güncelle</h5>
@@ -146,5 +146,22 @@
       Kapat
     </button>
     <button cButton (click)="update()" [cModalToggle]="updateModal.id" color="primary">Güncelle</button>
+  </c-modal-footer>
+</c-modal>
+
+
+
+<c-modal #featuresModal  alignment="center"backdrop="static" alignment="center" id="featuresModal" class="modal-dialog-centered modal-lg">
+  <c-modal-header>
+    <h5 cModalTitle>Özellikler</h5>
+    <button [cModalToggle]="featuresModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <p>{{ selectedMachine?.features }}</p>
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="featuresModal.id" cButton color="secondary">
+      kapat
+    </button>
   </c-modal-footer>
 </c-modal>

@@ -42,11 +42,11 @@
               "node_modules/sweetalert2/src/sweetalert2.scss",
               "node_modules/@coreui/coreui/scss/coreui.scss",
               "src/scss/styles.scss"
-
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "chart.js"
+              "chart.js",
+              "sweetalert2"
             ]
           },
           "configurations": {

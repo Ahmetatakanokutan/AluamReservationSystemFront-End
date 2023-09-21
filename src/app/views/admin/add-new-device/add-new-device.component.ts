@@ -68,6 +68,12 @@ export class AddNewDeviceComponent {
 
 
   onSubmit() {
+    if(this.MachineName.nativeElement.value === '' || this.MachinePrice.nativeElement.value === '' 
+      || this.file === null)
+    {
+      this.adminService.showErrorAlert('Girdiğiniz bilgiler eksik ya da hatalı.')
+    }
+    else{
     this.machine.name = this.MachineName.nativeElement.value
     this.machine.features = this.MachineFeatures.nativeElement.value
     this.machine.price = this.MachinePrice.nativeElement.value
@@ -76,18 +82,31 @@ export class AddNewDeviceComponent {
     
     this.adminService.addNewDevice(fd, this.machine)
   }
+  }
 
 onUpdate(machine: Machine) {
   
   this.selectedMachine = machine;
 }
+deleteMachine(machine: Machine) {
+  
+  this.adminService.deleteMachine(machine)
+}
 update() {
-  const updatedMachineName = this.UMachineName.nativeElement.value;
-  const updatedMachinePrice = this.UMachinePrice.nativeElement.value;
-  const updatedMachineFeatures = this.UMachineFeatures.nativeElement.value;
+  this.selectedMachine.name = this.UMachineName.nativeElement.value;
+  this.selectedMachine.price = this.UMachinePrice.nativeElement.value;
+  this.selectedMachine.features = this.UMachineFeatures.nativeElement.value;
 
-  // Güncelleme işlemini gerçekleştirin ve verileri kullanın
-  console.log(updatedMachineName, updatedMachinePrice, updatedMachineFeatures);
+  console.log( this.selectedMachine.name, this.selectedMachine.price, this.selectedMachine.features)
+  console.log( this.UMachineName.nativeElement.value, this.UMachinePrice.nativeElement.value, this.UMachineFeatures.nativeElement.value)
+  if(this.file != null){
+    const fd = new FormData();
+    fd.append('imageFile',this.file, this.file.name)
+    this.adminService.updateDeviceWithImg(fd , this.selectedMachine)
+  }
+  else{
+    this.adminService.updateDevice(this.selectedMachine)
+  }
 }
 
 }

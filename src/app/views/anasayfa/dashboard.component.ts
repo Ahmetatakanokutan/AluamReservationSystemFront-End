@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('auth-token'))
     this.slides[0] = {
       id: 0,
       src: './assets/images/xBY8ADcd.jpg',

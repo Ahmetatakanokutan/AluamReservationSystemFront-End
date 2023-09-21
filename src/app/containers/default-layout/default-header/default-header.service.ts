@@ -18,7 +18,7 @@ export class DefaultHeaderService {
       const authToken = localStorage.getItem('auth-token');
       if(authToken != null){
   
-        if(this.getStorageData(authToken).roles === 'USER'){
+        if(this.getStorageData(authToken).roles[0].authority === 'USER'){
           return '/siparis-ver'
         }
         else{
@@ -34,7 +34,7 @@ export class DefaultHeaderService {
     const authToken = localStorage.getItem('auth-token');
     if(authToken != null){
       this.isLoggedIn.next(true)
-      console.log(this.helper.decodeToken(authToken).roles)
+      console.log(this.helper.decodeToken(authToken).roles[0].authority)
       if(this.helper.isTokenExpired(authToken)){
         localStorage.removeItem('auth-token')
         this.isLoggedIn.next(false)
@@ -65,7 +65,7 @@ export class DefaultHeaderService {
     const authToken = localStorage.getItem('auth-token');
     if(authToken != null){
 
-      if(this.getStorageData(authToken).roles === 'USER'){
+      if(this.getStorageData(authToken).roles[0].authority === 'USER'){
         return null
       }
       else{
@@ -79,7 +79,7 @@ export class DefaultHeaderService {
     const authToken = localStorage.getItem('auth-token');
     if(authToken != null){
     
-      if(this.getStorageData(authToken).roles === 'ADMIN'){
+      if(this.getStorageData(authToken).roles[0].authority === 'ADMIN'){
         return null
      }
      else{
