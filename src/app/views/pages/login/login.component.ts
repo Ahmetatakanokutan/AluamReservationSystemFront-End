@@ -21,6 +21,7 @@ export class LoginComponent {
 
   @HostListener('document:keydown.enter', ['$event'])
   login(){
+    console.log(this.email + this.password);
     this.loginService.login(this.email,this.password).subscribe(
       (response) => {
 

@@ -1,40 +1,30 @@
-
-<table class="table table-striped ">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">İsim</th>
-        <th scope="col">Email</th>
-        <th scope="col">Telefon</th>
-        <th scope="col">Kullanıcı tipi</th>
-        <th scope="col">Rezervasyon zamanını incele</th> 
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td>Markfdgfdgfdgdgdfgfdg</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td><button class="btn btn-dark" (click)="changeRoute()">Rezervasyon Yap</button></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td><button class="btn btn-dark">Rezervasyon Yap</button></td> 
-      <tr>
-        <th scope="row">3</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><button class="btn btn-dark">Rezervasyon Yap</button></td>
-      </tr>
-    </tbody>
-  </table>
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">İsim</th>
+      <th scope="col">Soyisim</th>
+      <th scope="col">Email</th>
+      <th scope="col">Telefon</th>
+      <th scope="col">Kullanıcı tipi</th>
+      <th scope="col">Onayla</th>
+      <th scope="col">Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; let i = index">
+      <th class="align-middle" scope="row">{{ i + 1 }}</th>
+      <td class="align-middle">{{ user.name }}</td>
+      <td class="align-middle">{{ user.surname }}</td>
+      <td class="align-middle">{{ user.email }}</td>
+      <td class="align-middle">{{ user.telephone }}</td>
+      <td class="align-middle">{{ user.userType }}</td>
+      <td class="align-middle">
+        <button class="btn btn-success" (click)="confirm(user)">Onayla</button>
+      </td>
+      <td class="align-middle">
+        <button class="btn btn-danger" (click)="delete(user)">Sil</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

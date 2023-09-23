@@ -1,36 +1,84 @@
 <div class="bg-light min-vh-100 d-flex flex-row align-items-center">
   <c-container>
     <c-row class="justify-content-center">
-      <c-col lg="7" md="9" xl="6">
+      <c-col lg="9" md="9" xl="6">
         <c-card class="mx-4">
           <c-card-body class="p-4">
             <form cForm>
               <h1>Kayıt ol</h1>
-              <p class="text-medium-emphasis">hasap oluşturma ısteğini yöneticiye gönder</p>
+              <p class="text-medium-emphasis">hasap oluşturma isteğini yöneticiye gönder</p>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilUser"></svg>
                 </span>
-                <input autoComplete="name" cFormControl placeholder="isim" />
+                <input autoComplete="name" [(ngModel)]="user.name" name="name"
+                 cFormControl placeholder="isim" />
+              </c-input-group>
+              <c-input-group class="mb-3">
+                <span cInputGroupText>
+                  <svg cIcon name="cilUser"></svg>
+                </span>
+                <input autoComplete="surname" [(ngModel)]="user.surname" name="surname"
+                  cFormControl placeholder="soyad" />
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>@</span>
-                <input autoComplete="email" cFormControl placeholder="email" />
+                <input autoComplete="email" [(ngModel)]="user.email" name="email"
+                cFormControl placeholder="email" />
               </c-input-group>
               <c-input-group class="mb-3">
                 <span cInputGroupText>
                   <svg cIcon name="cilLockLocked"></svg>
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="şifre" type="password" />
+                <input autoComplete="new-password" [(ngModel)]="user.password" name="password"
+                 cFormControl placeholder="şifre" type="password" />
               </c-input-group>
-              <c-input-group class="mb-4">
+              <c-input-group class="mb-3">
                 <span cInputGroupText>
-                  <svg cIcon name="cilLockLocked"></svg>
+                  <svg cIcon name="cilPhone"></svg> <!-- Telefon simgesi için kullanabileceğiniz bir ikon kullanabilirsiniz -->
                 </span>
-                <input autoComplete="new-password" cFormControl placeholder="şifre tekrarı" type="password" />
+                <input
+                type="tel"
+                [(ngModel)]="user.telephone"
+                name="telephone"
+                cFormControl
+                placeholder="Telefon Numarası"
+                (input)="onInputChange($event)"
+                maxlength="10"
+                numberOnly
+              />
               </c-input-group>
+
+              <div class="mb-3">
+                <label class="form-label">Kullanıcı Tipi:</label>
+                <div class="form-check form-check-inline mx-2" >
+                  <input class="form-check-input custom-radio" type="radio" [(ngModel)]="user.userType" name="userType" [value]="UserType.PERSON" id="radioKisisel" required>
+                  <label class="form-check-label" for="radioKisisel">Kişisel</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input custom-radio" type="radio" [(ngModel)]="user.userType" name="userType" [value]="UserType.COMPANY" id="radioSirket" required>
+                  <label class="form-check-label" for="radioSirket">Şirket</label>
+                </div>
+              </div>
+
+            <c-input-group class="mb-3" *ngIf="user.userType === UserType.PERSON">
+              <span cInputGroupText>
+                <svg cIcon name="cilUser"></svg>
+              </span>
+              <input autoComplete="personalAddress" [(ngModel)]="user.personalAddress" name="personalAddress"
+                cFormControl placeholder="kişisel adres" />
+            </c-input-group>
+
+            <c-input-group class="mb-3" *ngIf="user.userType === UserType.COMPANY">
+              <span cInputGroupText>
+                <svg cIcon name="cilUser"></svg>
+              </span>
+              <input autoComplete="companyMail" [(ngModel)]="user.companyMail" name="companyMail"
+                cFormControl placeholder="şirket mail adresi" />
+            </c-input-group>
+
               <div class="d-grid">
-                <button cButton class="custom-button">hesap oluştur</button>
+                <button cButton class="custom-button" (click)="register()" >hesap oluştur</button>
               </div>
             </form>
           </c-card-body>

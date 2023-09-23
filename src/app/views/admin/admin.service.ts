@@ -1,13 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Machine } from 'src/app/EntityModels/Machine';
+import { Machine } from 'src/app/models/Machine';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
+import { RegisterRequest } from 'src/app/models/tempUser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
+
 
   private baseUrl = 'http://localhost:8080/api/admin';
 
@@ -18,13 +20,22 @@ export class AdminService {
   }
 
  
-  getAll(): Observable<Machine[]> {
+  getAllMachines(): Observable<Machine[]> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
     });
     const options = { headers };
 
     return this.http.get<Machine[]>(`${this.baseUrl}/get-all`, options);
+  }
+
+  getAllTempUsers() {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+    });
+    const options = { headers };
+
+    return this.http.get<RegisterRequest[]>(`${this.baseUrl}/get-all-temp-user`, options);
   }
 
 
@@ -137,6 +148,63 @@ export class AdminService {
         },
         (error) => {
           console.error('güncelleme için yetkiniz bulunmamakta:', error);
+          this.showErrorAlert(error.message);
+        }
+      );
+  }
+
+  addUser(user:RegisterRequest): Observable<string> {
+    const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+    });
+
+    const options = { headers };
+
+    return this.http.post<string>(`${this.baseUrl}/add-to-verified-users`, user, options);
+}
+
+
+  async deleteTempUserAfterAddingUser(user: RegisterRequest) {
+        try {
+          const response = await this.addUser(user).toPromise();
+          
+          const headers = new HttpHeaders({
+            'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+          });
+       
+      this.http.delete(`${this.baseUrl}/delete-temp-user/${user.id}`, { headers, responseType: 'text' }).subscribe(
+        (res) => {
+          console.log(res);
+          this.showSuccessAlert('Kullanıcı başarılı bir şekilde sisteme eklendi');
+
+        },
+        (error) => {
+          console.error('Resim yükleme hatası:', error);
+          this.showErrorAlert(error.message);
+        }
+      );
+        } catch (error) {
+          console.error('Resim yükleme hatası:', error);
+          // Hata işleme kodunu burada ekleyin ve kullanıcıya hata mesajını gösterin
+          this.showErrorAlert(error.message);
+        }
+      
+    }
+
+    deleteTempUser(user:RegisterRequest){
+      const headers = new HttpHeaders({
+          'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+      });
+  
+      
+      this.http.delete(`${this.baseUrl}/delete-machine/${user.id}`, { headers, responseType: 'text' }).subscribe(
+        (res) => {
+          console.log(res);
+          this.showSuccessAlert('Geçici kullanıcı başarıyla silindi');
+
+        },
+        (error) => {
+          console.error('Kullanıcı silmek için yetkiniz bulunmamakta:', error);
           this.showErrorAlert(error.message);
         }
       );

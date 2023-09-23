@@ -1,7 +1,8 @@
 import { Role } from "../enums/roleEnum"
+import { UserType } from "../enums/userEnum"
 import { product } from "./product"
 
-export interface User{
+export interface RegisterRequest{
 
     id:number
     name:string
@@ -9,7 +10,9 @@ export interface User{
     email:string
     password:string
     telephone:string
+    userType:UserType
     role:Role
-    videoUrl:string
-    products:Array<product>
+    companyMail:string
+    personalAddress:string
+    
   }

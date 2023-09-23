@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Machine } from '../../../EntityModels/Machine';
+import { Machine } from '../../../models/Machine';
 import { AdminService } from '../admin.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -45,7 +45,7 @@ export class AddNewDeviceComponent {
 
 
   getAll() {
-    this.adminService.getAll().subscribe(
+    this.adminService.getAllMachines().subscribe(
       (response: Machine[]) => {
         // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
         this.machines = response;

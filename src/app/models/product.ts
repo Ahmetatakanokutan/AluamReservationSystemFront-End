@@ -1,4 +1,4 @@
-import { users } from "./user"
+import { User } from "./user"
 
 export interface product{
 
@@ -8,5 +8,5 @@ export interface product{
     startTime:Date
     endTime:Date
     image:string
-    users:Array<users>
+    users:Array<User>
   }

@@ -31,15 +31,15 @@ const routes: Routes = [
     ]
 
   },
-
-
-    
+  
   
 ];
 
 
 @NgModule({
-  declarations: [AddNewDeviceComponent
+  declarations: [AddNewDeviceComponent,
+    RegisterRequestsComponent,
+    ReservationRequestsComponent
   ],
   
   imports: [
