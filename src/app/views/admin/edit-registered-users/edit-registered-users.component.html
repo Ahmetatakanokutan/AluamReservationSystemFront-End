@@ -1,0 +1,167 @@
+<table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">İsim</th>
+        <th scope="col">Soyisim</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Kullanıcı tipi</th>
+        <th scope="col">Şirket epostası</th>
+        <th scope="col">Kişisel adres</th>
+        <th scope="col">güncelle</th> 
+        <th scope="col">sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <th class="align-middle" scope="row">{{ i + 1 }}</th>
+        <td class="align-middle">{{ user.name }}</td>
+        <td class="align-middle">{{ user.surname }}</td>
+        <td class="align-middle">{{ user.email }}</td>
+        <td class="align-middle">{{ user.telephone }}</td>
+        <td class="align-middle">{{ user.userType }}</td>
+        <td class="align-middle">{{ user.companyMail }}</td>
+        <td class="align-middle">
+          <button [cModalToggle]="featuresModal.id" cButton color="dark" (click)="onUpdate(user)">adres</button>
+        </td>
+        <td class="align-middle">
+            <button [cModalToggle]="editModal.id" cButton color="success" (click)="onUpdate(user)">güncelle</button>
+          </td>
+          <td class="align-middle">
+            <button cButton color="danger" (click)="delete(user)">sil</button>
+          </td> 
+      </tr>
+    </tbody>
+  </table>
+
+
+<c-modal #editModal alignment="center"backdrop="static" alignment="center" id="editModal" class="modal-dialog-centered modal-lg">
+    <c-modal-header>
+      <h5 cModalTitle>Kullanıcı bilgilerini güncelle</h5>
+      <button [cModalToggle]="editModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      
+      <label for="UserName"  class="form-label">Adı</label>
+     
+      <input
+      #UserName
+      id="UserName"
+      type="text"
+      formControlName="UserName"
+      class="form-control"
+      [value]="user.name"
+      aria-describedby="passwordHelpBlock"
+    />
+  
+      <div class="mb-4">
+        </div>
+      <label for="UserSurname" class="form-label">SoyAdı</label>
+      <input
+      #UserSurname
+      id="UserSurname"
+      type="text"
+      formControlName="UserSurname"
+      class="form-control"
+      [value]="user.surname"
+      aria-describedby="passwordHelpBlock"
+    />
+    <div class="mb-4">
+    </div>
+  <label for="UserEmail" class="form-label">Eposta</label>
+  <input
+  #UserEmail
+  id="UserEmail"
+  type="text"
+  formControlName="UserEmail"
+  class="form-control"
+  [value]="user.email"
+  aria-describedby="passwordHelpBlock"
+/>
+<div class="mb-4">
+</div>
+<label for="UserPassword" class="form-label">Şifre</label>
+<input
+#UserPassword
+id="UserPassword"
+type="text"
+formControlName="UserPassword"
+class="form-control"
+[value]="user.password"
+aria-describedby="passwordHelpBlock"
+/>
+<div class="mb-4">
+</div>
+<label for="UserTelephone" class="form-label">Telefon</label>
+<input
+#UserTelephone
+id="UserTelephone"
+type="text"
+formControlName="UserTelephone"
+class="form-control"
+[value]="user.telephone"
+aria-describedby="passwordHelpBlock"
+/>
+<div class="mb-4">
+</div>
+<label for="UserUserType" class="form-label">Kayıt tipi</label>
+<input
+#UserUserType
+id="UserUserType"
+type="text"
+formControlName="UserUserType"
+class="form-control"
+[value]="user.userType"
+aria-describedby="passwordHelpBlock"
+/>
+<div class="mb-4">
+</div>
+<label for="UserCompanyMail" class="form-label">Şirket epostası</label>
+<input
+#UserCompanyMail
+id="UserCompanyMail"
+type="text"
+formControlName="UserCompanyMail"
+class="form-control"
+[value]="user.companyMail"
+aria-describedby="passwordHelpBlock"
+/>
+<div class="mb-4">
+</div>
+<label for="UserPersonalAddress" class="form-label">Kişisel Adres</label>
+<input
+#UserPersonalAddress
+id="UserPersonalAddress"
+type="text"
+formControlName="UserPersonalAddress"
+class="form-control"
+[value]="user.personalAddress"
+aria-describedby="passwordHelpBlock"
+/>
+  
+      
+    </c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="editModal.id" cButton color="secondary">
+        Kapat
+      </button>
+      <button cButton (click)="update()" [cModalToggle]="editModal.id" color="primary">Güncelle</button>
+    </c-modal-footer>
+  </c-modal>
+  
+
+  <c-modal #featuresModal  alignment="center"backdrop="static" alignment="center" id="featuresModal" class="modal-dialog-centered modal-lg">
+    <c-modal-header>
+      <h5 cModalTitle>Özellikler</h5>
+      <button [cModalToggle]="featuresModal.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>
+      <p>{{ user?.personalAddress }}</p>
+    </c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="featuresModal.id" cButton color="secondary">
+        kapat
+      </button>
+    </c-modal-footer>
+  </c-modal>

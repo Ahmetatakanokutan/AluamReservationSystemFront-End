@@ -5,38 +5,21 @@ import { SiparisVerComponent } from './siparis-ver.component';
 import { DxButtonModule, DxSchedulerModule, DxValidatorModule } from 'devextreme-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { ButtonModule, ModalModule } from '@coreui/angular';
 
-
-
-
-const routes: Routes = [
-  {
-    path: '',
-    children:[
-      {
-        path: '',
-        component:SiparisVerComponent,
-        pathMatch:'full'
-      },
-      {
-        path: 'calendar',
-        component: CalendarComponent,
-      }
-    ]
-
-  },
 
 
     
-  
-];
 @NgModule({
   declarations: [SiparisVerComponent, CalendarComponent],
   imports: [
     CommonModule,
     DxSchedulerModule,
     DxButtonModule,
+    ButtonModule,
     DxValidatorModule,
+    CommonModule,
+    ModalModule,
     RouterModule.forChild([
       {
         path: '',
@@ -44,7 +27,7 @@ const routes: Routes = [
         pathMatch:'full'
       },
       {
-        path: 'calendar',
+        path: 'calendar/:id',
         component: CalendarComponent,
       },
     ]),

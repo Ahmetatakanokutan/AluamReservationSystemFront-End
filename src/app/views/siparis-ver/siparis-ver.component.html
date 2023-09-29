@@ -3,37 +3,49 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Resim</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-      <th scope="col">Rezervasyon Yap</th> 
+      <th scope="col">İsim</th>
+      <th scope="col">fiyat</th>
+      <th scope="col">özellikler</th>
+      <th scope="col">rezervasyon</th> 
+      
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-      
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td><button class="btn btn-dark" (click)="changeRoute()">Rezervasyon Yap</button></td>
+
+    <tr *ngFor="let machine of machines">
+
+      <th class="align-middle" scope="row">{{machine.id}}</th>
+      <td><img
+        [src]="machine.imageUrl"
+        alt="Resim"
+        [style.max-width.px]="100" 
+        [style.max-height.px]="100" 
+      > </td>
+      <td class="align-middle">{{machine.name}}</td>
+      <td class="align-middle">{{machine.price}}</td>
+      <td class="align-middle">
+        <button [cModalToggle]="featuresModal.id"  cButton color="dark" (click)="onUpdate(machine)">özellikler</button>
+      </td>
+      <td class="align-middle">
+        <button  cButton color="primary" (click) = "changeRoute(machine)">Rezervasyon yap</button>
+      </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-      
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td><button class="btn btn-dark">Rezervasyon Yap</button></td> 
-    <tr>
-      <th scope="row">3</th>
-      <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-      
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td><button class="btn btn-dark">Rezervasyon Yap</button></td>
-    </tr>
+   
+
   </tbody>
 </table>
+
+<c-modal #featuresModal  alignment="center"backdrop="static" alignment="center" id="featuresModal" class="modal-dialog-centered modal-lg">
+  <c-modal-header>
+    <h5 cModalTitle>Özellikler</h5>
+    <button [cModalToggle]="featuresModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <p>{{ machine?.features }}</p>
+  </c-modal-body>
+  <c-modal-footer>
+    <button [cModalToggle]="featuresModal.id" cButton color="secondary">
+      kapat
+    </button>
+  </c-modal-footer>
+</c-modal>

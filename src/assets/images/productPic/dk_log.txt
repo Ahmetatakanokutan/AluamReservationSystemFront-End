@@ -1,0 +1,7 @@
+
+Begin:
+Language code:1055
+System: 64
+Retry: 0
+Get Url: https://imobie-resource.com/product/droidkit.7z
+Download url: https://imobie-resource.com/product/droidkit.7z

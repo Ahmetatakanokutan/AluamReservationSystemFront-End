@@ -2,38 +2,25 @@
     <thead class="table-dark">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Resim</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-        <th scope="col">Rezervasyon Yap</th> 
+        <th scope="col">Başvuru yapan</th>
+        <th scope="col">Başlangıç zamanı</th>
+        <th scope="col">Bitiş zamanı</th>
+        <th scope="col">ıncele</th>
+        <th scope="col">sil</th> 
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td><button class="btn btn-dark" (click)="changeRoute()">Rezervasyon Yap</button></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td><button class="btn btn-dark">Rezervasyon Yap</button></td> 
-      <tr>
-        <th scope="row">3</th>
-        <td><img src="data:image/jpeg;base64,INSERT_BASE64_ENCODED_IMAGE_HERE" alt="Resim"></td> 
-        
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-        <td><button class="btn btn-dark">Rezervasyon Yap</button></td>
+      <tr *ngFor="let reservation of reservationRequests; let i = index">
+        <th class="align-middle" scope="row">{{ reservation.id }}</th>
+        <td class="align-middle">{{ reservation.userMail }}</td>
+        <td class="align-middle">{{ reservation.startDate | date:'short':'+0300'| date:'dd/MM/yyyy HH:mm' }}</td>
+        <td class="align-middle">{{ reservation.endDate | date:'short':'+0300' | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td class="align-middle">
+          <button class="btn btn-success" (click)="changeRoute(reservation)">incele</button>
+        </td>
+        <td class="align-middle">
+          <button class="btn btn-danger" (click)="delete(reservation)">Sil</button>
+        </td>
       </tr>
     </tbody>
   </table>

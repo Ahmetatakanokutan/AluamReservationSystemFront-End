@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Machine } from 'src/app/models/Machine';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { RegisterRequest } from 'src/app/models/tempUser';
+import { User } from 'src/app/models/user';
+import { ReservationRequest } from 'src/app/models/ReservationRequests';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +31,16 @@ export class AdminService {
     return this.http.get<Machine[]>(`${this.baseUrl}/get-all`, options);
   }
 
+  getAllReservationRequest() {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+    });
+    const options = { headers };
+
+    return this.http.get<ReservationRequest[]>(`${this.baseUrl}/get-all-reservation-request`, options);
+  }
+
+
   getAllTempUsers() {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
@@ -36,6 +48,15 @@ export class AdminService {
     const options = { headers };
 
     return this.http.get<RegisterRequest[]>(`${this.baseUrl}/get-all-temp-user`, options);
+  }
+
+  getAllUsers() {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+    });
+    const options = { headers };
+
+    return this.http.get<RegisterRequest[]>(`${this.baseUrl}/get-all-users`, options);
   }
 
 
@@ -85,6 +106,20 @@ export class AdminService {
       }
     }
 
+    updateUser(user: User) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+      });
+  
+      const options = { headers };
+  
+      this.http.put(`${this.baseUrl}/update-user`, user, options).subscribe(
+        (res) => {
+          console.log(res);
+          this.showSuccessAlert('Kullanıcı bilgileri başarıyla güncellendi');
+        })
+  
+    }
 
   updateDevice(machine:Machine){
 
@@ -101,6 +136,7 @@ export class AdminService {
       })
 
   }
+  
   async updateDeviceWithImg(fd:FormData, machine:Machine){
 
       try {
@@ -132,6 +168,24 @@ export class AdminService {
 
   }
   
+  deleteUser(user: User) {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+    });
+
+
+      this.http.delete(`${this.baseUrl}/delete-user/${user.id}`, { headers, responseType: 'text' }).subscribe(
+        (res) => {
+          console.log(res);
+          this.showSuccessAlert('Makine başarıyla silindi');
+
+        },
+        (error) => {
+          console.error('güncelleme için yetkiniz bulunmamakta:', error);
+          this.showErrorAlert(error.message);
+        }
+      );
+  }
 
   deleteMachine(machine: Machine) {
 
@@ -209,6 +263,8 @@ export class AdminService {
         }
       );
   }
+
+  
 
   
   showSuccessAlert(successMessage: string) {

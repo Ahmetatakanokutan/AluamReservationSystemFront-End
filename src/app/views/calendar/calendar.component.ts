@@ -4,10 +4,18 @@ import { loadMessages, locale ,} from 'devextreme/localization';
 import { DxSchedulerModule } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { months } from 'moment';
 
 import turkish from './tr.json'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { DateInterval } from 'src/app/models/DateInterval';
+import { ReservationRequest } from 'src/app/models/ReservationRequests'
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { ResourceAssignedEvent } from 'devextreme/ui/gantt';
+
+
+var additionalData: DateInterval[] = [];
 
 @Component({
   selector: 'app-calendar',
@@ -15,24 +23,92 @@ import turkish from './tr.json'
   styleUrls: ['./calendar.component.scss'],
   providers: [DataService]
 })
+
+
 export class CalendarComponent {
  
   dataSource: DataSource;
   control: false | undefined;
+  selectedStartDate: Date | undefined;
+  selectedEndDate: Date | undefined;
+  reservationRequest:ReservationRequest
+  resourcesData: DateInterval[];
 
-  
   views = ['workWeek', 'month'];
 
+  id:number
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id']; // :id parametresini al
+      console.log('Received ID:', this.id);
+      // Burada parametreyi istediğiniz şekilde kullanabilirsiniz
+    });
+  }
+
+
   currentView = this.views[0];
-  
-  constructor(private router: Router,public dataService: DataService) {
+  private baseUrl = 'http://localhost:8080/api/user';
+  constructor(private router: Router,public dataService: DataService, private http: HttpClient, private route: ActivatedRoute) {
     loadMessages(turkish);
+
     this.dataSource = new DataSource({
-      store: dataService.getData(),
+      
+      load: () => {
+        const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+      });
+      const options = { headers };
+
+      return this.http.get<DateInterval[]>(`${this.baseUrl}/get-all-appointment/${this.id}`, options).toPromise()    .then((httpData: DateInterval[]) => {
+        // HTTP verilerine eklemek istediğiniz başka verileri burada ekleyin
+
+  
+        // HTTP verileriyle ek verileri birleştirin
+        const mergedData = httpData.concat(additionalData);
+  
+        // Birleştirilmiş verileri dönün
+        return mergedData;
+      })
+      .catch(error => {
+        // Hata işleme
+      });
+    },
+      
+      
+      
+      insert: (values) =>{
+
+        additionalData = [
+          values
+          ];
+          
+        return null
+      },
+      update:(key,values) =>{
+        additionalData = [
+          values
+          ];
+
+        return null
+      }
     });
     
     locale(navigator.language);
     
+  }
+  
+  tokenParser(token: string): string {
+    const regex = /{"token":"(.*?)"}/;
+    const match = token.match(regex);
+
+    if (match) {
+      const jsonData = match[1];
+      return jsonData;
+    } else {
+      console.log("Eşleşen veri bulunamadı.");
+      return token;
+    }
   }
 
   onOptionChanged(e: any) {
@@ -44,6 +120,30 @@ export class CalendarComponent {
     Swal.fire(status, message, type);
   }
 
+  onAppointmentFormCreated(e:any){
+    const formItems = e.form.option('items');
+
+    // Formdaki gereksiz alanları filtrele ve sadece başlangıç ve bitiş tarihleri kalsın
+    const filteredFormItems = formItems.filter((item: any) => {
+      const itemName = item.dataField;
+      
+      return itemName === 'startDate' || itemName === 'endDate';
+
+    });
+  
+    // Formdaki gereksiz alanları kaldır
+    e.form.option('items', filteredFormItems);
+  
+    // Kaydet ve Kapat düğmelerini ayarla
+    const buttons = e.component._popup.option('buttons');
+    buttons[0].options = { visible: false };
+    buttons[1].options = { text: 'Close' };
+    e.component._popup.option('buttons', buttons);
+  }
+  getAdditionalDataCellColor(): string {
+    // additionalData içindeki hücreyi her zaman kırmızı yap
+    return 'red';
+  }
 
   onAppointmentFormOpening(e: any) {
     const startDate = e.appointmentData.startDate;
@@ -69,7 +169,29 @@ export class CalendarComponent {
     }
     else{
       this.Notification('başarılı','seçiminiz gereksinimlere uyumludur.','success');
+      console.log(e);
+      this.selectedStartDate = startDate;
+      this.selectedEndDate = endDate;
     }
+  }
+
+
+
+  sendReservationRequest(){
+     this.reservationRequest = {id:0, startDate:additionalData[0].startDate, endDate:additionalData[0].endDate,
+    machineId:this.id,text:additionalData[0].text, userMail:this.getJsonData(localStorage.getItem('auth-token')).sub}
+    this.dataService.sendReservationRequest(this.reservationRequest).subscribe(
+      (res) =>{
+        this.showSuccessAlert('seçiminiz gereksinimlere uyumludur.')
+      },
+    (error) =>{
+      this.Notification('hata','geçmiş tarihte, öğle arasında ya da aynı hücreye birden fazla rezervasyon yapılamaz','error');
+    }
+    )
+
+    
+
+
   }
   isDinnerControl(startDate: Date, endDate: Date) {
     const Starthours = startDate.getHours();
@@ -81,15 +203,18 @@ export class CalendarComponent {
 
   onAppointmentUpdating(e: any) {
     const isValidAppointment = this.isValidAppointment(e.component, e.newData);
-    const startDate = new Date(e.appointmentData.startDate);
-    const endDate = new Date(e.appointmentData.endDate);
+    console.log(e)
+    const startDate = new Date(e.newData.startDate);
+    const endDate = new Date(e.newData.endDate);
     const isThereMoreThanOneAppointment = this.isThereMoreThanOneAppointment(startDate, endDate);
-    if (!isValidAppointment) {
+    if (!isValidAppointment || isThereMoreThanOneAppointment) {
       e.cancel = true;
       this.Notification('hata','güncelleştirmede bir çakışma oluşmuştur.','error'); 
     }
     else{
       this.Notification('başarılı','güncelleştirmeniz gereksinimlere uyumludur.','success');
+      this.selectedStartDate = startDate;
+      this.selectedEndDate = endDate;
     }
   }
 
@@ -174,6 +299,12 @@ export class CalendarComponent {
     return true;
   }
 
+  getJsonData(authToken:string){
+    const token = new JwtHelperService();
+    
+      return token.decodeToken(authToken)
+
+  }
   isValidAppointmentDate(date: Date) {
     return !this.isHoliday(date) && !this.isDinner(date) && !this.isWeekend(date);
   }
@@ -186,13 +317,22 @@ export class CalendarComponent {
     const endDateEditor = form.getEditor('endDate');
     endDateEditor.option('disabledDates', holidays);
   }
+
+  showSuccessAlert(successMessage: string) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Başarılı',
+      text: successMessage,
+      showConfirmButton: true,
+      confirmButtonText: 'Tamam'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // OK tuşuna basıldığında sayfayı yeniden yükleyin
+        this.router.navigate(['/anasayfa']);
+      }
+    });
+  }
 }
 
-function notify(arg0: string, arg1: string, arg2: number) {
-  throw new Error('Function not implemented.');
-}
 
-function isTehereMoreThanOneAppoitment(startDate: any, endDate: any): boolean {
-  throw new Error('Function not implemented.');
-}
 

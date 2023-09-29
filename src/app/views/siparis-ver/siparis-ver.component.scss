@@ -1,0 +1,10 @@
+.btn.btn-primary {
+    background-color: #0098B2; /* Arka plan rengi */
+    border-color: #0098B2; /* Kenarlık rengi (isteğe bağlı) */
+    color: white; /* Yazı rengi */
+    transition: background-color 0.3s ease; /* Geçiş efekti ayarı */
+  }
+  
+  .btn.btn-primary:hover {
+    background-color: #008099; /* Mouse üzerine gelince rengi karart */
+  }

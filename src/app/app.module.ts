@@ -3,7 +3,7 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ButtonModule, FormModule, ModalModule, TableModule, UtilitiesModule } from '@coreui/angular';
 
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
@@ -23,12 +23,9 @@ import {
   BadgeModule,
   BreadcrumbModule,
   ButtonGroupModule,
-  ButtonModule,
-  ModalModule,
   CardModule,
   DropdownModule,
   FooterModule,
-  FormModule,
   GridModule,
   HeaderModule,
   ListGroupModule,
@@ -37,7 +34,6 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
-  UtilitiesModule,
 
 
 } from '@coreui/angular';
@@ -46,6 +42,8 @@ import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { SiparisVerModule } from './views/siparis-ver/siparis-ver.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminRoutingModule } from './views/admin/admin-routing.module';
+
+
 
 
 
@@ -89,6 +87,8 @@ const APP_CONTAINERS = [
     CardModule,
     NgScrollbarModule,
     SiparisVerModule,
+    TableModule,
+    ButtonModule,
     AdminRoutingModule,
     ReactiveFormsModule,
     

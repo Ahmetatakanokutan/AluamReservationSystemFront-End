@@ -1,0 +1,17 @@
+.table th,
+.table td {
+  padding: 5px 10px; /* İstediğiniz yatay ve dikey padding değerlerini ayarlayabilirsiniz */
+}
+
+/* Tablonun taşan içeriği alt satıra inmesini sağlama */
+.table td {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.table th:nth-child(6),
+.table td:nth-child(6),
+.table th:nth-child(7),
+.table td:nth-child(7) {
+width: 10px; /* İstediğiniz genişliği ayarlayabilirsiniz */
+}

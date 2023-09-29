@@ -17,8 +17,12 @@
     (onAppointmentAdding)="onAppointmentAdding($event)"
     (onAppointmentUpdating)="onAppointmentUpdating($event)"
     (onOptionChanged)="onOptionChanged($event)"
+    (onAppointmentFormCreated)="onAppointmentFormCreated($event)"
+    
+
   >
-    <div
+  
+    <div 
       *dxTemplate="let dataCell of 'dataCellTemplate'"
       [ngClass]="{
         'disable-date': isDisableDate(dataCell.startDate),
@@ -26,6 +30,7 @@
           !isDisableDate(dataCell.startDate) && isDinner(dataCell.startDate),
         'dx-scheduler-date-table-cell-text': isMonthView()
       }"
+      
     >
       {{ isMonthView() ? dataCell.startDate.getDate() : "" }}
    
@@ -49,5 +54,5 @@
   </dx-scheduler>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end custom-button-container">
-    <button class="btn btn-dark">Yöneticiye randevu talebini ilet</button>
+    <button class="btn btn-dark" (click) = "sendReservationRequest()">Yöneticiye randevu talebini ilet</button>
   </div>

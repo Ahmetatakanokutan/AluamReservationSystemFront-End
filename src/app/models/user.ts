@@ -1,15 +1,17 @@
 import { Role } from "../enums/roleEnum"
+import { UserType } from "../enums/userEnum"
 import { product } from "./product"
 
 export interface User{
 
-    id:number
-    name:string
-    surname:string
-    email:string
-    password:string
-    telephone:string
-    role:Role
-    videoUrl:string
-    products:Array<product>
+  id:number
+  name:string
+  surname:string
+  email:string
+  password:string
+  telephone:string
+  userType:UserType
+  role:Role
+  companyMail:string
+  personalAddress:string
   }

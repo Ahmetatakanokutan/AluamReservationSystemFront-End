@@ -35,7 +35,6 @@ export class RegisterRequestsComponent {
       (response: RegisterRequest[]) => {
         // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
         this.users = response;
-        console.log(this.users[0])
       },
       (error) => {
         // HTTP isteğinde hata oluştu, hata işleme kodunu burada ekleyebilirsiniz

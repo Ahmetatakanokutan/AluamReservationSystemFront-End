@@ -7,6 +7,9 @@ import { ReservationRequestsComponent } from './reservation-requests/reservation
 import { ButtonModule, FormModule, ModalModule, TableModule, UtilitiesModule } from '@coreui/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditRegisteredUsersComponent } from './edit-registered-users/edit-registered-users.component';
+import { AdminCalendarComponent } from './admin-calendar/admin-calendar.component';
+import { DxButtonModule, DxSchedulerModule, DxValidatorModule } from 'devextreme-angular';
 
 const routes: Routes = [
   {
@@ -25,7 +28,26 @@ const routes: Routes = [
       },
       {
         path: 'reservation-requests',
-        component:ReservationRequestsComponent,
+        children:[
+
+          {
+            path: '',
+            pathMatch:'full',
+            component:ReservationRequestsComponent,
+            
+          },
+          {
+            path: 'adminCalendar/:id/:machine-id',
+            component:AdminCalendarComponent,
+            
+          },
+        ]
+        
+        
+      },
+      {
+        path: 'edit-registered-users',
+        component:EditRegisteredUsersComponent,
         
       },
     ]
@@ -39,11 +61,16 @@ const routes: Routes = [
 @NgModule({
   declarations: [AddNewDeviceComponent,
     RegisterRequestsComponent,
-    ReservationRequestsComponent
+    ReservationRequestsComponent,
+    EditRegisteredUsersComponent,
+    AdminCalendarComponent
   ],
   
   imports: [
     CommonModule,
+    DxSchedulerModule,
+    DxButtonModule,
+    DxValidatorModule,
     ModalModule,
     HttpClientModule,
     ButtonModule,
