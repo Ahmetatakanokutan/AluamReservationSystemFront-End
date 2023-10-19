@@ -5,7 +5,12 @@
   height: 10vh; /* İçerik yüksekliğini ayarlayın, isteğe bağlı */
 }
 
-
+button[color="primary"] {
+  background-color: #008099; /* Arka plan rengi */
+  color: white; /* Yazı rengi */
+  border: 1px solid #008099; /* Kenarlık rengi ve kalınlığı */
+  /* Diğer stil özelliklerini burada tanımlayabilirsiniz. */
+}
 h2 {
   position: relative;
   padding: 0;

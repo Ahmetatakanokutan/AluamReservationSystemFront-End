@@ -3,4 +3,5 @@ export interface DateInterval{
     startDate:Date
     endDate:Date
     text:string
+    color:string
 }

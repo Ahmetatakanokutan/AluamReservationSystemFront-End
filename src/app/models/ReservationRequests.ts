@@ -5,4 +5,5 @@ export interface ReservationRequest{
     startDate:Date
     endDate:Date
     text:string
+    color:any
 }

@@ -1,6 +1,6 @@
-<h1 class="custom-heading">Tarih Seçimi Yapınız</h1>
+<h1 class="custom-heading">Onaylanacak Tarih</h1>
   <dx-scheduler
-    [dataSource]="dataSource"
+  [dataSource]="dataSource"
     [views]="views"
     [currentView]="currentView"
     
@@ -16,8 +16,15 @@
     (onOptionChanged)="onOptionChanged($event)"
     (onAppointmentFormCreated)="onAppointmentFormCreated($event)"
     
+    
 
   >
+
+  <div *dxTemplate="let dataCell of 'dataCellTemplate'" class="data-cell"
+  [style.backgroundColor]="getAdditionalDataCellColor(dataCell)">
+{{ isMonthView() ? dataCell.startDate.getDate() : "" }}
+</div>
+
   
     <div 
       *dxTemplate="let dataCell of 'dataCellTemplate'"
@@ -32,6 +39,15 @@
       {{ isMonthView() ? dataCell.startDate.getDate() : "" }}
    
     </div>
+
+    <div *dxTemplate="let e of 'additionalData'">
+      <div *ngIf="e.color">
+        <div class="item-badge" [ngStyle]="{ backgroundColor: e.color }"></div>
+      </div>
+      <div class="item-text">{{ e.text }}</div>
+    </div>
+
+
     <div
     *dxTemplate="let dateCell of 'dateCellTemplate'"
     [ngClass]="{ 'disable-date': isDisabledDateCell(dateCell.date) }"
@@ -51,10 +67,9 @@
   </dx-scheduler>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end custom-button-container">
-    <button class="btn btn-dark" (click) = "approveReservationRequest()">İsteği onayla
-    </button>
+    <button class="btn btn-prime custom-button" (click)="approveReservationRequest()">İsteği onayla</button>
   </div>
 
   <div class="d-grid gap-2 d-md-flex justify-content-md-end custom-button-container">
-    <button class="btn btn-dark" (click) = "removeReservationRequest()">Yöneticiye randevu talebini ilet</button>
+    <button class="btn btn-dark" (click) = "removeReservationRequest()">isteği sil</button>
   </div>

@@ -46,6 +46,16 @@ const routes: Routes = [
         loadChildren: () =>
           import('./views/pages/pages.module').then((m) => m.PagesModule)
       },
+      {
+        path: 'user-calendar',
+        loadChildren: () =>
+          import('./views/user-reservation-calendar/user-reservation-calendar.module').then((m) => m.UserReservationCalendarModule)
+      },
+      {
+        path: 'update-user',
+        loadChildren: () =>
+          import('./views/update-user/update-user.module').then((m) => m.UpdateUserModule)
+      },
     ]
   },
   {

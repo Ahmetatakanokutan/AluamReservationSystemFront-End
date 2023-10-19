@@ -22,16 +22,7 @@ export class AdminCalendarService {
   constructor(private http: HttpClient) {
     
   }
-  getAllAppointments(): any {
-    
-    const authToken = localStorage.getItem('auth-token')!;
-    // authToken, null olmayan bir dizge olduğunu belirtir
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.tokenParser(authToken)}`
-    });
-    const options = { headers };
-    return this.http.get<DateInterval[]>(`${this.baseUrl}/get-all-appointment`, options)
-  }
+
 
   tokenParser(token: string): string {
     const regex = /{"token":"(.*?)"}/;
@@ -41,7 +32,7 @@ export class AdminCalendarService {
       const jsonData = match[1];
       return jsonData;
     } else {
-      console.log("Eşleşen veri bulunamadı.");
+
       return token;
     }
   }
@@ -67,7 +58,7 @@ export class AdminCalendarService {
     const options = { headers };
     this.http.delete(`${this.baseUrl}/remove-reservation-request/${reservationRequest.id}`, { headers, responseType: 'text' }).subscribe(
       (res) => {
-        console.log(res);
+
         this.showSuccessAlert('Makine başarıyla silindi');
 
       },

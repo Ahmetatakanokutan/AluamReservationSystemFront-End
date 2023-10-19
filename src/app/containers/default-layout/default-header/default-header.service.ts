@@ -30,11 +30,45 @@ export class DefaultHeaderService {
     
   }
 
+  routeRes(){ 
+  
+    const authToken = localStorage.getItem('auth-token');
+    if(authToken != null){
+
+      if(this.getStorageData(authToken).roles[0].authority === 'USER'){
+        return '/user-calendar'
+      }
+      else{
+      return 'login'
+    }
+    }
+    return 'login'
+
+  
+}
+
+routeOpt(){ 
+  
+  const authToken = localStorage.getItem('auth-token');
+  if(authToken != null){
+
+    if(this.getStorageData(authToken).roles[0].authority === 'USER'){
+      return '/update-user'
+    }
+    else{
+    return 'login'
+  }
+  }
+  return 'login'
+
+
+}
+
   isLogged() {
     const authToken = localStorage.getItem('auth-token');
     if(authToken != null){
       this.isLoggedIn.next(true)
-      console.log(this.helper.decodeToken(authToken).roles[0].authority)
+
       if(this.helper.isTokenExpired(authToken)){
         localStorage.removeItem('auth-token')
         this.isLoggedIn.next(false)

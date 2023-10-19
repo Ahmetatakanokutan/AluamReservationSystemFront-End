@@ -83,10 +83,20 @@
   }
   
   
+  .data-cell {
+    background-color: red; /* Veri hücrelerini kırmızı yapmak için */
+  }
+  
+  .date-cell {
+    background-color: blue; /* Tarih hücrelerini mavi yapmak için */
+  }
   
   
-  
-  
+  .custom-button {
+    background-color: #008099; /* Arka plan rengi */
+    color: white; /* Yazı rengi */
+    /* Diğer stil özelliklerini burada tanımlayabilirsiniz. */
+  }
   
 
   

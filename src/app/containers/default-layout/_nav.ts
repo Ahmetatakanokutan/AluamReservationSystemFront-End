@@ -26,6 +26,32 @@ export const navItems: INavData[] = [
 
   },
   {
+    name: 'rezervasyonlarım',
+    url: defaultHeaderService.routeRes(),
+    iconComponent: { name: 'cil-calendar' },
+    attributes: {
+      hidden:defaultHeaderService.hiddenForUser(),
+    }
+
+  },
+
+  {
+    name: 'Ayarlar',
+    title: true,
+    attributes: {
+      hidden:defaultHeaderService.hiddenForUser()
+    }
+  },
+  {
+    name: 'bilgilerimi güncelle',
+    url: defaultHeaderService.routeOpt(),
+    iconComponent: { name: 'cil-calendar' },
+    attributes: {
+      hidden:defaultHeaderService.hiddenForUser(),
+    }
+
+  },
+  {
     name: 'Yönetici Ayarları',
     title: true,
     attributes: {

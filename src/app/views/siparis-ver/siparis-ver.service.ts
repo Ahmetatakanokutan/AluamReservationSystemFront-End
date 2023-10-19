@@ -29,7 +29,7 @@ export class SiparisVerService {
       const jsonData = match[1];
       return jsonData;
     } else {
-      console.log("Eşleşen veri bulunamadı.");
+
       return token;
     }
   }

@@ -48,11 +48,10 @@ export class RegisterComponent {
   @HostListener('document:keydown.enter', ['$event'])
   register(){
 
-    console.log(this.user)
+
     this.registerService.existByEmail(this.user.email).subscribe(
       (response) => {
 
-        console.log(response)
         if(response === true){
         this.showSuccessAlert("kayıt isteğiniz başarılı bir şekilde yönetici'ye gönderildi")
 

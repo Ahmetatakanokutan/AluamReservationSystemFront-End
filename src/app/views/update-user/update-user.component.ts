@@ -1,14 +1,15 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AdminService } from '../admin.service';
-import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { UpdateUserService } from './update-user.service';
+import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-registered-users',
-  templateUrl: './edit-registered-users.component.html',
-  styleUrls: ['./edit-registered-users.component.scss']
+  selector: 'app-update-user',
+  templateUrl: './update-user.component.html',
+  styleUrls: ['./update-user.component.scss']
 })
-export class EditRegisteredUsersComponent {
+export class UpdateUserComponent {
   @ViewChild('UserName') UserName: ElementRef;
   @ViewChild('UserSurname') UserSurname: ElementRef;
   @ViewChild('UserEmail') UserEmail: ElementRef;
@@ -17,39 +18,29 @@ export class EditRegisteredUsersComponent {
   @ViewChild('UserUserType') UserUserType: ElementRef;
   @ViewChild('UserCompanyMail') UserCompanyMail: ElementRef;
   @ViewChild('UserPersonalAddress') UserPersonalAddress: ElementRef;
-  users:User[] = []
+
+
   user: User = {
     id: 0, name: '', surname: '', email: '', password: '',
     telephone: '', role: null, userType: null, companyMail: '', personalAddress: ''
   };
 
-  adminService:AdminService
+  constructor(private activatedRoute: ActivatedRoute, private updateUser: UpdateUserService){}
 
-  constructor(adminService:AdminService,  private activatedRoute:ActivatedRoute){
-
-    this.adminService = adminService
-  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params =>{
 
-        this.getAll();
+        this.getUserByEmail();
 
     })
   }
 
 
-  getAll() {
-    this.adminService.getAllUsers().subscribe(
-      (response: User[]) => {
-        // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
-        this.users = response;
-
-      },
-      (error) => {
-        // HTTP isteğinde hata oluştu, hata işleme kodunu burada ekleyebilirsiniz
-        console.error('HTTP isteği sırasında bir hata oluştu:', error);
-      }
+  getUserByEmail() {
+    this.updateUser.getUserByEmail().subscribe(res =>{
+      this.user = res
+    }
     );
   }
 
@@ -57,14 +48,15 @@ export class EditRegisteredUsersComponent {
   
     this.user = user;
   }
-  delete(user: User) {
-    
-    this.adminService.deleteUser(user)
-  }
+
   update() {
     this.user.name = this.UserName.nativeElement.value;
     this.user.surname = this.UserSurname.nativeElement.value;
     this.user.email = this.UserEmail.nativeElement.value;
+    if(this.user.password === this.UserPassword.nativeElement.value){
+      this.showErrorAlert('lütfen şifrenizi değiştirin ya da şifre alanına eski şifrenizi giriniz')
+      return 0
+    }
     this.user.password = this.UserPassword.nativeElement.value;
     this.user.telephone = this.UserTelephone.nativeElement.value;
     this.user.userType = this.UserUserType.nativeElement.value;
@@ -74,7 +66,18 @@ export class EditRegisteredUsersComponent {
   
 
 
-      this.adminService.updateUser(this.user)
+      this.updateUser.updateUser(this.user)
+      return 1
     
+  }
+
+  showErrorAlert(errorMessage: string) {
+    Swal.fire({
+      icon: 'error',
+      title: 'hata',
+      text: errorMessage,
+      showConfirmButton: true,
+      confirmButtonText: 'Tamam'
+    })
   }
 }

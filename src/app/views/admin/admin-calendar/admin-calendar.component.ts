@@ -14,6 +14,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { ResourceAssignedEvent } from 'devextreme/ui/gantt';
 import { AdminCalendarService } from './admin-calendar.service';
 import { NgZone } from '@angular/core';
+import { Machine } from 'src/app/models/Machine';
 
 var additionalData: DateInterval[] = [];
 
@@ -37,13 +38,26 @@ export class AdminCalendarComponent {
 
   id:number
   machineId:number
+  machineName:string
+  helper = new JwtHelperService();
+
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id']; // :id parametresini al
       this.machineId = params['machine-id'];
-      console.log('Received ID:', this.id);
-      console.log('Received ID:', this.machineId);
-      // Burada parametreyi istediğiniz şekilde kullanabilirsiniz
+
+      
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
+      });
+      const options = { headers };
+      
+      this.http.get<Machine>(`${this.baseUrl}/get-machine-by-id/${ this.machineId}`, options).subscribe(res =>{
+
+        this.machineName = res.name
+      })
+
     });
 
     const headers = new HttpHeaders({
@@ -51,14 +65,19 @@ export class AdminCalendarComponent {
     });
     const options = { headers };
     
+
+
     this.http.get<ReservationRequest>(`${this.baseUrl}/get-reservation-request/${this.id}`, options).subscribe(res =>{
         // Create a DateInterval object from each ReservationRequest
         this.reservationRequest = res
+        this.machineName += ' ' + res.userMail
+
         additionalData = [{
           id: 1,
           startDate: new Date(res.startDate),
           endDate: new Date(res.endDate),
-          text: "EKLENMEK ISTENEN TARIH"
+          text: "EKLENMEK ISTENEN TARIH",
+          color: '#fcb65e'
         }];
         
     
@@ -71,6 +90,21 @@ export class AdminCalendarComponent {
     
   }
 
+  getAdditionalDataCellColor(dataCell) {
+    if (additionalData.length > 0) {
+      const cellDate = dataCell.startDate;
+  
+      // Eğer eklenen tarihler ile hücrenin tarihi eşleşiyorsa, kırmızı rengini döndürün.
+      if (additionalData.some(item => item.startDate.getTime() === cellDate.getTime())) {
+        return 'red';
+      }
+    }
+  
+    // Eşleşme yoksa veya eklenen tarihler boşsa, varsayılan rengi döndürün.
+    return 'transparent'; // veya başka bir renk
+  }
+
+  
 updateDate(){
   return new Date(additionalData[0].startDate.getFullYear(),additionalData[0].startDate.getMonth(), additionalData[0].startDate.getDate())
 }
@@ -131,7 +165,7 @@ updateDate(){
       const jsonData = match[1];
       return jsonData;
     } else {
-      console.log("Eşleşen veri bulunamadı.");
+
       return token;
     }
   }
@@ -145,35 +179,37 @@ updateDate(){
     Swal.fire(status, message, type);
   }
 
-  onAppointmentFormCreated(e:any){
-    const formItems = e.form.option('items');
+  onAppointmentFormCreated(e: any) {
+  // Formdaki öğeleri alın
+  const formItems = e.form.option('items');
 
-    // Formdaki gereksiz alanları filtrele ve sadece başlangıç ve bitiş tarihleri kalsın
-    const filteredFormItems = formItems.filter((item: any) => {
-      const itemName = item.dataField;
-      
-      return itemName === 'startDate' || itemName === 'endDate';
+  // Sadece başlangıç tarihi (startDate) ve bitiş tarihi (endDate) öğelerini saklayın
+  const filteredFormItems = formItems.filter((item: any) => {
+    return item.dataField === 'startDate' || item.dataField === 'endDate';
+  });
 
-    });
-  
-    // Formdaki gereksiz alanları kaldır
-    e.form.option('items', filteredFormItems);
-  
-    // Kaydet ve Kapat düğmelerini ayarla
-    const buttons = e.component._popup.option('buttons');
-    buttons[0].options = { visible: false };
-    buttons[1].options = { text: 'Close' };
-    e.component._popup.option('buttons', buttons);
-  }
-  getAdditionalDataCellColor(): string {
-    // additionalData içindeki hücreyi her zaman kırmızı yap
-    return 'red';
-  }
+  filteredFormItems.forEach((item: any) => {
+    if (item.dataField === 'startDate') {
+      item.label.text = 'Başlangıç Zamanı';
+    } else if (item.dataField === 'endDate') {
+      item.label.text = 'Bitiş Zamanı';
+    }
+  });
 
+  // Formun öğelerini güncelleyin
+  e.form.option('items', filteredFormItems);
+
+  // Düğmeleri özelleştirin
+  const buttons = e.form.option('buttons');
+  buttons[0].options = { visible: false }; // Kaydet düğmesini gizle
+  buttons[1].options.text = 'Kapat'; // İkinci düğmenin metnini özelleştirin
+  e.form.option('buttons', buttons);
+}
  
 
 
   approveReservationRequest(){
+    this.reservationRequest.text = this.machineName
     this.dataService.approveReservationRequest(this.reservationRequest).subscribe(
       (res) =>{
         this.showSuccessAlertApprove('Rezervasyon isteği onaylandı.')

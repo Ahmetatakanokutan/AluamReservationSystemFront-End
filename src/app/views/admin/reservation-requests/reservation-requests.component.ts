@@ -34,7 +34,7 @@ export class ReservationRequestsComponent {
       (response: ReservationRequest[]) => {
         // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
         this.reservationRequests = response;
-        console.log(this.reservationRequests[1])
+
       },
       (error) => {
         // HTTP isteğinde hata oluştu, hata işleme kodunu burada ekleyebilirsiniz
@@ -44,11 +44,10 @@ export class ReservationRequestsComponent {
   }
 
   changeRoute(reservationRequest: ReservationRequest) {
+    reservationRequest.text =reservationRequest.userMail
 
-    console.log(reservationRequest.id)
-    console.log( reservationRequest.machineId)
     const newUrl = 'admin/reservation-requests/adminCalendar/' + reservationRequest.id +'/' + reservationRequest.machineId; 
-    console.log( newUrl)
+
     this.router.navigate([newUrl]);
   }
   delete(reservationRequest: ReservationRequest){}

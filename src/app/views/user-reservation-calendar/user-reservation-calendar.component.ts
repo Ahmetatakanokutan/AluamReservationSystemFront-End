@@ -14,38 +14,27 @@ import { ReservationRequest } from 'src/app/models/ReservationRequests'
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ResourceAssignedEvent } from 'devextreme/ui/gantt';
 
-
 var additionalData: DateInterval[] = [];
 
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  providers: [DataService]
+  selector: 'app-user-reservation-calendar',
+  templateUrl: './user-reservation-calendar.component.html',
+  styleUrls: ['./user-reservation-calendar.component.scss']
 })
+export class UserReservationCalendarComponent {
 
-
-export class CalendarComponent {
- 
   dataSource: DataSource;
   control: false | undefined;
   selectedStartDate: Date | undefined;
   selectedEndDate: Date | undefined;
   reservationRequest:ReservationRequest
   resourcesData: DateInterval[];
+  helper = new JwtHelperService();
 
   views = ['workWeek', 'month'];
 
-  id:number
+  email:string = this.helper.decodeToken(localStorage.getItem('auth-token')).sub
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.id = params['id']; // :id parametresini al
-
-      // Burada parametreyi istediğiniz şekilde kullanabilirsiniz
-    });
-    
-  }
 
 
   currentView = this.views[0];
@@ -60,8 +49,10 @@ export class CalendarComponent {
         'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
       });
       const options = { headers };
-      return this.http.get<DateInterval[]>(`${this.baseUrl}/get-all-appointment/${this.id}`, options).toPromise()    .then((httpData: DateInterval[]) => {
+      return this.http.get<DateInterval[]>(`${this.baseUrl}/get-all-user-appointment/${this.email}`, options).toPromise()    .then((httpData: DateInterval[]) => {
         // HTTP verilerine eklemek istediğiniz başka verileri burada ekleyin
+
+  
 
         // HTTP verileriyle ek verileri birleştirin
         const mergedData = httpData.concat(additionalData);
@@ -186,8 +177,6 @@ export class CalendarComponent {
   }
 
   onAppointmentFormCreated(e:any){
-    e.form.itemOption('allDay', { visible: false });
-    e.form.itemOption('recurrenceRule', { visible: false });
     const formItems = e.form.option('items');
 
     // Formdaki gereksiz alanları filtrele ve sadece başlangıç ve bitiş tarihleri kalsın
@@ -213,8 +202,6 @@ export class CalendarComponent {
   }
 
   onAppointmentFormOpening(e: any) {
-    e.form.itemOption('allDay', { visible: false });
-    e.form.itemOption('recurrenceRule', { visible: false });
     const startDate = e.appointmentData.startDate;
     const endDate = e.appointmentData.endDate;
     const isThereMoreThanOneAppointment = this.isThereMoreThanOneAppointment(startDate, endDate);
@@ -256,24 +243,6 @@ export class CalendarComponent {
     }
   }
 
-
-
-  sendReservationRequest(){
-     this.reservationRequest = {id:0, startDate:additionalData[0].startDate, endDate:additionalData[0].endDate,color:null,
-    machineId:this.id,text:additionalData[0].text, userMail:this.getJsonData(localStorage.getItem('auth-token')).sub}
-    this.dataService.sendReservationRequest(this.reservationRequest).subscribe(
-      (res) =>{
-        this.showSuccessAlert('seçiminiz gereksinimlere uyumludur.')
-      },
-    (error) =>{
-      this.Notification('hata','geçmiş tarihte, öğle arasında ya da aynı hücreye birden fazla rezervasyon yapılamaz','error');
-    }
-    )
-
-    
-
-
-  }
   isDinnerControl(startDate: Date, endDate: Date) {
     
     const Starthours = startDate.getHours();

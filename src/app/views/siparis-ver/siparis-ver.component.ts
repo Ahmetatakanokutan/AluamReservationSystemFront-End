@@ -34,7 +34,7 @@ export class SiparisVerComponent {
       (response: Machine[]) => {
         // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
         this.machines = response;
-        console.log(this.machines[1].imageUrl)
+
       },
       (error) => {
         // HTTP isteğinde hata oluştu, hata işleme kodunu burada ekleyebilirsiniz

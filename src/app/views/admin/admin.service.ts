@@ -77,7 +77,6 @@ export class AdminService {
           const response = await this.uploadImage(fd).toPromise();
           machine.imageUrl = response;
     
-          console.log(machine.imageUrl);
           const headers = new HttpHeaders({
             'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
           });
@@ -86,7 +85,7 @@ export class AdminService {
     
           this.http.post(`${this.baseUrl}/add-machine`, machine, options).subscribe(
             (res) => {
-              console.log(res);
+
               // İşlem başarılı olduğunda SweetAlert'ı burada çağırın
               this.showSuccessAlert
               ('Makine başarıyla eklendi')
@@ -115,7 +114,7 @@ export class AdminService {
   
       this.http.put(`${this.baseUrl}/update-user`, user, options).subscribe(
         (res) => {
-          console.log(res);
+
           this.showSuccessAlert('Kullanıcı bilgileri başarıyla güncellendi');
         })
   
@@ -131,7 +130,7 @@ export class AdminService {
 
     this.http.post(`${this.baseUrl}/update-machine`, machine, options).subscribe(
       (res) => {
-        console.log(res);
+
         this.showSuccessAlert('Makine başarıyla güncellendi');
       })
 
@@ -143,7 +142,6 @@ export class AdminService {
         const response = await this.uploadImage(fd).toPromise();
         machine.imageUrl = response;
   
-        console.log(machine.imageUrl);
         const headers = new HttpHeaders({
           'Authorization': `Bearer ${this.tokenParser(localStorage.getItem('auth-token'))}` 
         });
@@ -152,7 +150,7 @@ export class AdminService {
   
         this.http.post(`${this.baseUrl}/update-machine`, machine, options).subscribe(
           (res) => {
-            console.log(res);
+
             this.showSuccessAlert('Makine başarıyla güncellendi');
           },
           (error) => {
@@ -176,7 +174,7 @@ export class AdminService {
 
       this.http.delete(`${this.baseUrl}/delete-user/${user.id}`, { headers, responseType: 'text' }).subscribe(
         (res) => {
-          console.log(res);
+      
           this.showSuccessAlert('Makine başarıyla silindi');
 
         },
@@ -196,7 +194,7 @@ export class AdminService {
 
       this.http.delete(`${this.baseUrl}/delete-machine/${machine.id}`, { headers, responseType: 'text' }).subscribe(
         (res) => {
-          console.log(res);
+ 
           this.showSuccessAlert('Makine başarıyla silindi');
 
         },
@@ -228,7 +226,7 @@ export class AdminService {
        
       this.http.delete(`${this.baseUrl}/delete-temp-user/${user.id}`, { headers, responseType: 'text' }).subscribe(
         (res) => {
-          console.log(res);
+  
           this.showSuccessAlert('Kullanıcı başarılı bir şekilde sisteme eklendi');
 
         },
@@ -253,7 +251,7 @@ export class AdminService {
       
       this.http.delete(`${this.baseUrl}/delete-machine/${user.id}`, { headers, responseType: 'text' }).subscribe(
         (res) => {
-          console.log(res);
+   
           this.showSuccessAlert('Geçici kullanıcı başarıyla silindi');
 
         },
@@ -301,7 +299,7 @@ export class AdminService {
       const jsonData = match[1];
       return jsonData;
     } else {
-      console.log("Eşleşen veri bulunamadı.");
+
       return token;
     }
   }

@@ -49,7 +49,7 @@ export class AddNewDeviceComponent {
       (response: Machine[]) => {
         // HTTP isteği başarıyla tamamlandı, verileri kullanabilirsiniz
         this.machines = response;
-        console.log(this.machines[1].imageUrl)
+
       },
       (error) => {
         // HTTP isteğinde hata oluştu, hata işleme kodunu burada ekleyebilirsiniz
@@ -59,7 +59,7 @@ export class AddNewDeviceComponent {
   }
 
   onFileSelected(event){
-    console.log(event);
+
     if (!event) return
     else{
     this.file = <File>event.target.files[0]
@@ -97,8 +97,7 @@ update() {
   this.selectedMachine.price = this.UMachinePrice.nativeElement.value;
   this.selectedMachine.features = this.UMachineFeatures.nativeElement.value;
 
-  console.log( this.selectedMachine.name, this.selectedMachine.price, this.selectedMachine.features)
-  console.log( this.UMachineName.nativeElement.value, this.UMachinePrice.nativeElement.value, this.UMachineFeatures.nativeElement.value)
+
   if(this.file != null){
     const fd = new FormData();
     fd.append('imageFile',this.file, this.file.name)
